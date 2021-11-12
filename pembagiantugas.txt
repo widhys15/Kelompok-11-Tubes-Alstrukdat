@@ -1,0 +1,32 @@
+Program:    
+        Main Menu (ngeprint pilihan-pilihan [new game, exit]) → Fay
+        Player (minta jumlah pemain sama namanya ngeset lokasi menjadi 1)
+            Set posisi 1 (* dipaling kiri map)
+            Create skill → Widhy
+            Create buff → Widhy
+     
+        Baca file konfigurasi → Aufa    
+            Baca Peta (baca file konfigurasi)
+            Baca MaxRoll dan Teleporter
+            
+Turn:     
+        TulisMap (sama seperti command map) → Aufa
+        Skill (dapetin skill) → Widhy
+        Nulisin buff → Widhy
+Baca Command
+        Skill → Widhy
+        Buff → Widhy
+        Map → Aufa
+        Inspect → Aufa
+        Roll (ngasilin angka bisa gerak berapa antara 1-maxroll, baca skill & buff, baca gerak) → Hefin
+        Teleport (mindahin pemain cuma sekali, kalo ada buff imunitas dia bisa ga gerak) → Hefin
+        Endturn (mindahin turn ke player lain) → Fay
+        Undo (balikin state ke state sebelum di endturn) → Salsa
+Endgame → Salsa
+        Nampilin pesan selesai
+        Nulisin peringkat pemain
+Player  (nyimpen nilainya setelah roll)  
+        Nyimpenin nilai posisi
+        Nyimpenin nilai skill → Widhy
+        Nyimpenin nilai buff → Widhy
+            
