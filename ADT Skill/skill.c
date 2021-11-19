@@ -32,9 +32,3 @@ void skill(List L)
         // Masuk main menu command
     }
 }
-
-int main(List listskill)
-{
-    skill(listskill);
-    PrintSkill(listskill);
-}
