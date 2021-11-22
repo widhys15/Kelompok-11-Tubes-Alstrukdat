@@ -123,6 +123,50 @@ boolean STRCOMP(Kata k1, char k2[100])
     }
     return sama;
 }
+
+boolean IsNumber(Kata k)
+{
+    int i;
+    if (CKata.TabKata[1] == '-')
+    {
+        i = 2;
+    }
+    else
+    {
+        i = 1;
+    }
+    boolean number = true;
+    while (number && i <= k.Length)
+    {
+        switch (k.TabKata[i])
+        {
+        case '0':
+            break;
+        case '1':
+            break;
+        case '2':
+            break;
+        case '3':
+            break;
+        case '4':
+            break;
+        case '5':
+            break;
+        case '6':
+            break;
+        case '7':
+            break;
+        case '8':
+            break;
+        case '9':
+            break;
+        default:
+            number = false;
+        };
+        i++;
+    }
+    return number;
+}
 int KataInt(Kata k)
 {
     int i;

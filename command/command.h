@@ -14,5 +14,5 @@ void UseSkill(Players *p, int inputs, int currentPlayer);
 void skill(Players *p, int currentPlayer);
 void oldSkill(Player *p);
 void Buff(Players p, int currentPlayer);
-// void CopyArrayPlayer(Players copy, Players *paste);
+void CopyArrayPlayer(Players copy, Players *paste);
 #endif

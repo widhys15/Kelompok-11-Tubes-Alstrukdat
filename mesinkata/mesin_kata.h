@@ -52,6 +52,7 @@ void ADVKATA();
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 Kata AskCommand();
 boolean STRCOMP(Kata k1, char k2[100]);
+boolean IsNumber(Kata k);
 int KataInt(Kata k);
 void KataMap(Kata k, char importMap[100]);
 void KataPlayer(Kata k, char namaPlayer[20]);

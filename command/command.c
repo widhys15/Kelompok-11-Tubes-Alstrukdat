@@ -452,102 +452,67 @@ void skill(Players *p, int currentPlayer)
     printf("\nMasukkan skill: ");
     STARTKATA();
     inputs = KataInt(CKata);
-    boolean done = false;
     boolean kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
-    while (inputs != 0 && kosong == false)
+    boolean OutFungsi = false;
+    boolean CekJenisNumber = IsNumber(CKata);
+    // A
+    do
     {
-        if (inputs > 0 && inputs <= NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer]))))
+        if (!(CekJenisNumber) || (inputs > NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer])))) || (inputs < (-1 * NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer]))))))
         {
-            puts("");
-            PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
-            printf(" memakai skill ");
-            PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-            UseSkill(p, inputs, currentPlayer);
-            kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
-            // DeleteSkill(&(PlayerSkills(*p)), inputs);
+            puts("\nInput tidak valid!!!");
         }
-        else if (inputs < 0 && inputs >= (-1 * NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer])))))
+        else
         {
-            inputs = inputs * (-1);
-            puts("");
-            PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
-            printf(" membuang skill ");
-            PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-            DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-            kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
+            if (inputs > 0 && inputs <= NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer]))))
+            {
+                puts("");
+                PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
+                printf(" memakai skill ");
+                PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+                UseSkill(p, inputs, currentPlayer);
+                kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
+                // DeleteSkill(&(PlayerSkills(*p)), inputs);
+            }
+            else if (inputs < 0 && inputs >= (-1 * NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer])))))
+            {
+                inputs = inputs * (-1);
+                puts("");
+                PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
+                printf(" membuang skill ");
+                PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+                DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+                kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
+            }
+            else if (kosong == true)
+            {
+                printf("\nSkill kosong sehingga tidak dapat dihapus atau dipakai\n");
+                OutFungsi = true;
+                break;
+            }
+            else if (inputs == 0)
+            {
+                puts("");
+                PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
+                printf(" keluar dari command SKILL\n");
+                OutFungsi = true;
+                break;
+            }
         }
-        // STARTKATA();
-        // inputs = KataInt(CKata);
-        else if (inputs > NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer]))) || inputs < (-1 * NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer])))))
-        {
-            printf("\nInput anda salah! Skill yang bisa dipakai dan dibuang adalah skill yang ditampilkan.\n");
-        }
+
         PrintMenuSkill((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
         printf("\nMasukkan skill: ");
         STARTKATA();
+        CekJenisNumber = IsNumber(CKata);
         inputs = KataInt(CKata);
-    };
-    if (kosong == true)
-    {
-        printf("\nSkill kosong sehingga tidak dapat dihapus atau dipakai\n");
-    }
-    if (inputs == 0 && kosong == false)
-    {
-        puts("");
-        PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
-        printf(" keluar dari command SKILL\n");
-    }
+    } while (!OutFungsi);
+    // ### CEK VALID INPUT END ###
 }
-void oldSkill(Player *p)
+
+void CopyArrayPlayer(Players copy, Players *paste)
 {
-    int inputs;
-
-    PrintMenuSkill((PlayerSkills(*p)));
-    printf("\nMasukkan skill: ");
-    STARTKATA();
-    inputs = KataInt(CKata);
-    boolean done = false;
-    while (inputs != 0)
-    {
-        if (inputs > 0)
-        {
-            puts("");
-            PrintNamePlayer(*p);
-            printf(" memakai skill ");
-            PrintSkillKe((PlayerSkills(*p)), inputs);
-            printf("\n");
-            // InsBuff(&(PlayerBuffs(*p)), inputs);
-            DeleteSkill(&(PlayerSkills(*p)), inputs);
-        }
-        else if (inputs < 0)
-        {
-            inputs = inputs * (-1);
-            puts("");
-            PrintNamePlayer(*p);
-            printf(" membuang skill ");
-            PrintSkillKe((PlayerSkills(*p)), inputs);
-            printf("\n");
-            DeleteSkill(&(PlayerSkills(*p)), inputs);
-        }
-        // STARTKATA();
-        // inputs = KataInt(CKata);
-        PrintMenuSkill((PlayerSkills(*p)));
-        printf("\nMasukkan skill: ");
-        STARTKATA();
-        inputs = KataInt(CKata);
-    };
-    if (inputs == 0)
-    {
-        puts("");
-        PrintNamePlayer(*p);
-        printf(" keluar dari command SKILL\n");
-    }
+    (*paste) = copy;
 }
-
-// void CopyArrayPlayer(Players copy, Players *paste)
-// {
-//     (*paste) = copy;
-// }
 
 // int test2(List L, int x)
 // {

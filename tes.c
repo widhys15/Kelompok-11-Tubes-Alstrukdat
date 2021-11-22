@@ -99,17 +99,52 @@ int main()
         // Import setTeleport end
 
         // ### TEST GAME ###
+        List SkillPlayer1;
         boolean EndGame = false;
         int currentPlayer = 0;
-        int EndRondeKe = 0;
+        int RondeKe = 1;
+        Players PR1;
         while (!EndGame)
         {
             if (currentPlayer == JumlahPlayer(ArrPlayer))
             {
-                EndRondeKe++;
+                RondeKe++;
                 currentPlayer = 0;
             }
-            printf("\nRonde Ke-%d\n", EndRondeKe + 1);
+            // ### TEST COPY PASTE DATA START ###
+            if (RondeKe == 1)
+            {
+                printf("COPY DATA DI AKHIR RONDE KE 1\n");
+                CreateEmpty(&SkillPlayer1);
+                int tmp = NbElmt((PlayerSkills(ArrayPlayer(ArrPlayer)[0])));
+                for (int i = 1; i <= tmp; i++)
+                {
+                    int infoSkill = PrintInfoKe((PlayerSkills(ArrayPlayer(ArrPlayer)[0])), i);
+                    // MASUKIN DATA SKILL KE SkillPlayer1
+                    address P = Alokasi(infoSkill);
+                    if (P != Nil)
+                    {
+                        if (NbElmt(SkillPlayer1) < 10)
+                        {
+
+                            InsertLast(&SkillPlayer1, P);
+                        }
+                        else
+                        {
+                            printf("Skill sudah penuh\n");
+                        }
+                    }
+                }
+            }
+            if (RondeKe == 3)
+            {
+                (PlayerSkills(ArrayPlayer(ArrPlayer)[1])) = SkillPlayer1;
+                printf("\nENDGAME\n");
+                EndGame = true;
+                break;
+            }
+            // ### TEST COPY PASTE DATA END ###
+            printf("\nRonde Ke-%d\n", RondeKe);
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
             MAP(lvl, ArrPlayer);
             printf("|----------------------------------------|\n");
@@ -118,7 +153,7 @@ int main()
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
-            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 7);
+            // InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 1);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
             printf("\nMasukkan Command: ");
@@ -255,6 +290,28 @@ int main()
         //     }
         //     PrintSkill((PlayerSkills(ArrayPlayer(ArrPlayer)[0])));
         //     PrintSkill((PlayerSkills(ArrayPlayer(ArrPlayer)[1])));
+
+        // ### TEST COPY DATA PLAYERS ###
+        puts("### DATA RONDE KE 1 ###");
+        PrintMenuSkill(SkillPlayer1);
+        // if (ImmuneTP(ArrayPlayer(PR1)[0]))
+        // {
+        //     printf("ADA IMMUNE TP DI AKHIR RONDE 1\n");
+        // }
+        // else
+        // {
+        //     printf("GK ADA IMMUNE DI AKHIR RONDE 1 \n");
+        // }
+        puts("### DATA RONDE KE 2 ###");
+        PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayer)[1])));
+        // if (ImmuneTP(ArrayPlayer(ArrPlayer)[0]))
+        // {
+        //     printf("ADA IMMUNE TP\n");
+        // }
+        // else
+        // {
+        //     printf("GK ADA IMMUNE\n");
+        // }
 
     } // END IF
     else
