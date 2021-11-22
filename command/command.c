@@ -366,18 +366,69 @@ void UseSkill(Players *p, int inputs, int currentPlayer)
     else if (info == 7)
     {
         int chosenPlayer;
-        if (currentPlayer == JumlahPlayer(*p) - 1)
+        int temp;
+        if (JumlahPlayer(*p) == 2)
         {
-            chosenPlayer = 0;
+            if (currentPlayer == JumlahPlayer(*p) - 1)
+            {
+                chosenPlayer = 0;
+            }
+            else
+            {
+                chosenPlayer = currentPlayer + 1;
+            }
+            temp = Posisi(ArrayPlayer(*p)[currentPlayer]);
+            Posisi(ArrayPlayer(*p)[currentPlayer]) = Posisi(ArrayPlayer(*p)[chosenPlayer]);
+            Posisi(ArrayPlayer(*p)[chosenPlayer]) = temp;
+            DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
         }
         else
         {
-            chosenPlayer = currentPlayer + 1;
+            int arrplayer[4] = {0, 1, 2, 3};  // MAX PLAYER
+            int choice[JumlahPlayer(*p) - 1]; // Array yg bukan currentPlayer
+            int j = 0;
+            // Membuat array tanpa currentPlayer
+            puts("Player yang ingin ditukar posisinya: ");
+            for (int i = 0; i < 4; i++)
+            {
+                if ((currentPlayer != arrplayer[i]) && (j < JumlahPlayer(*p) - 1))
+                {
+                    choice[j] = arrplayer[i];
+                    // Tampilan pilihan player
+
+                    printf("%d. ", j + 1);
+                    PrintNamePlayer((ArrayPlayer(*p)[choice[j]]));
+                    puts("");
+                    j++;
+                }
+            }
+            printf("Masukkan Player: ");
+            STARTKATA();
+            // ### CEK VALID INPUT START ###
+            boolean valid = false;
+            int jawaban = KataInt(CKata);
+            do
+            {
+                if ((jawaban < 1) && (jawaban >= JumlahPlayer(*p)))
+                {
+                    printf("Jawab dengan nilai antara 1 sampai %d", JumlahPlayer(*p) - 1);
+                    printf("Masukkan Player: ");
+                    STARTKATA();
+                    jawaban = KataInt(CKata);
+                }
+                else
+                {
+                    valid = true;
+                }
+            } while (!valid);
+            // ### CEK VALID INPUT END ###
+            chosenPlayer = choice[jawaban - 1];
+            temp = Posisi(ArrayPlayer(*p)[currentPlayer]);
+            Posisi(ArrayPlayer(*p)[currentPlayer]) = Posisi(ArrayPlayer(*p)[chosenPlayer]);
+            Posisi(ArrayPlayer(*p)[chosenPlayer]) = temp;
+            DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
         }
-        int temp = Posisi(ArrayPlayer(*p)[currentPlayer]);
-        Posisi(ArrayPlayer(*p)[currentPlayer]) = Posisi(ArrayPlayer(*p)[chosenPlayer]);
-        Posisi(ArrayPlayer(*p)[chosenPlayer]) = temp;
-        DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+
         //belum beres
         // bikin variabel posisi sekarang
         // bikin temp
