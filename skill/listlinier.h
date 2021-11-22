@@ -165,5 +165,6 @@ void PrintMenuSkill(List L);
 
 void RandomSkill(List *L, int X);
 int PrintInfoKe(List L, int X);
+void InjectSkill(List *L, int infoSkill);
 
 #endif

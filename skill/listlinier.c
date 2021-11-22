@@ -372,7 +372,7 @@ void PrintSkill(List L)
     if (!IsEmpty(L))
     {
         int i = 1;
-        printf("Kamu memiliki skill: \n");
+        printf("\nKamu memiliki skill: \n");
         address P = First(L);
         while (P != Nil)
         {
@@ -407,7 +407,7 @@ void PrintSkill(List L)
     }
     else
     {
-        printf("Skill kosong\n");
+        printf("\nSkill kosong\n");
     }
 };
 
@@ -554,8 +554,8 @@ void PrintSkillKe(List L, int X)
 
 void PrintMenuSkill(List L)
 {
-    printf("\nTekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.\n");
     PrintSkill(L);
+    printf("\nTekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.\n");
 }
 
 // void skill(List *L)
@@ -681,3 +681,20 @@ int PrintInfoKe(List L, int X)
         }
     }
 };
+
+void InjectSkill(List *L, int infoSkill)
+{
+    address P = Alokasi(infoSkill);
+    if (P != Nil)
+    {
+        if (NbElmt(*L) < 10)
+        {
+
+            InsertLast(L, P);
+        }
+        else
+        {
+            printf("Skill sudah penuh\n");
+        }
+    }
+}

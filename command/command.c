@@ -68,7 +68,7 @@ void Teleport(Player *p, int currentPosition, Map M)
     if (outTP == -1)
     {
         PrintNamePlayer(*p);
-        printf(" tidak menemukan teleport.\n");
+        printf(" tidak menemukan teleport.");
     }
     else
     {
@@ -102,14 +102,14 @@ void Teleport(Player *p, int currentPosition, Map M)
                 printf(" tidak teleport.\n");
                 // Set buff teleport menjadi false karena telah digunakan
                 ImmuneTP(*p) = false;
-                puts("Buff imunitas teleport hilang.");
+                printf("Buff imunitas teleport hilang.");
             }
             else if (CKata.TabKata[1] == 'Y')
             {
                 // Pindah tempat
                 Posisi(*p) = outTP;
                 PrintNamePlayer(*p);
-                printf(" teleport ke petak %d.\n", outTP);
+                printf(" teleport ke petak %d.", outTP);
             }
         }
         else if (ImmuneTP(*p) == false)
@@ -117,7 +117,7 @@ void Teleport(Player *p, int currentPosition, Map M)
             // Pindah tempat
             Posisi(*p) = outTP;
             PrintNamePlayer(*p);
-            printf(" teleport ke petak %d.\n", outTP);
+            printf(" teleport ke petak %d.", outTP);
         }
     }
 }
@@ -126,9 +126,9 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
 {
     if (BuffPengecil(*p) == true)
     {
-        printf("\nMaxRoll sebelum dibuff menggunakan senter pengecil hoki %d", maxRoll);
+        printf("\nMaxRoll sebelum dibuff menggunakan senter pengecil hoki %d\n", maxRoll);
         maxRoll = floor(maxRoll / 2);
-        printf("MaxRoll sesudah dibuff menggunakan senter pengecil hoki %d", maxRoll);
+        printf("MaxRoll sesudah dibuff menggunakan senter pengecil hoki %d\n", maxRoll);
     }
     else if (BuffPembesar(*p) == true)
     {
@@ -139,6 +139,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
 
     srand(time(0));
     int num = (rand() % (maxRoll - minRoll + 1)) + minRoll;
+    puts("");
     PrintNamePlayer(*p);
     printf(" mendapatkan angka %d.\n", num);
     int CPosisi = Posisi(*p);
@@ -180,7 +181,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
             if (pilihan == 1)
             {
                 PrintNamePlayer(*p);
-                printf(" maju %d langkah.\n", forward);
+                printf(" maju %d langkah.\n", num);
                 // Change currentPosition Player
                 Posisi(*p) = forward;
                 PrintNamePlayer(*p);
@@ -191,7 +192,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
             else if (pilihan == 2)
             {
                 PrintNamePlayer(*p);
-                printf(" mundur %d langkah.\n", backward);
+                printf(" mundur %d langkah.\n", num);
                 // Change currentPosition Player
                 Posisi(*p) = backward;
                 PrintNamePlayer(*p);
@@ -206,7 +207,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
             PrintNamePlayer(*p);
             printf(" dapat maju.\n");
             PrintNamePlayer(*p);
-            printf(" maju %d langkah.\n", forward);
+            printf(" maju %d langkah.\n", num);
             // Change currentPosition Player
             Posisi(*p) = forward;
             PrintNamePlayer(*p);
@@ -221,7 +222,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
             PrintNamePlayer(*p);
             printf(" dapat mundur.\n");
             PrintNamePlayer(*p);
-            printf(" mundur %d langkah.\n", backward);
+            printf(" mundur %d langkah.\n", num);
             // Change currentPosition Player
             Posisi(*p) = backward;
             PrintNamePlayer(*p);
@@ -231,7 +232,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
         else if ((InfoPetak(M, forward) == '#') && (InfoPetak(M, backward) == '#'))
         {
             PrintNamePlayer(*p);
-            printf(" tidak dapat bergerak.\n");
+            printf(" tidak dapat bergerak.");
         }
     }
     else if ((forward <= maxPetak) && (backward <= 0))
@@ -239,14 +240,14 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
         if ((InfoPetak(M, forward) == '#'))
         {
             PrintNamePlayer(*p);
-            printf(" tidak dapat bergerak.\n");
+            printf(" tidak dapat bergerak.");
         }
         else
         {
             PrintNamePlayer(*p);
             printf(" dapat maju.\n");
             PrintNamePlayer(*p);
-            printf(" maju %d langkah.\n", forward);
+            printf(" maju %d langkah.\n", num);
             // Change currentPosition Player
             Posisi(*p) = forward;
             PrintNamePlayer(*p);
@@ -260,14 +261,14 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
         if ((InfoPetak(M, backward) == '#'))
         {
             PrintNamePlayer(*p);
-            printf(" tidak dapat bergerak.\n");
+            printf(" tidak dapat bergerak.");
         }
         else
         {
             PrintNamePlayer(*p);
             printf(" dapat mundur.\n");
             PrintNamePlayer(*p);
-            printf(" mundur %d langkah.\n", backward);
+            printf(" mundur %d langkah.\n", num);
             // Change currentPosition Player
             Posisi(*p) = backward;
             PrintNamePlayer(*p);
@@ -280,7 +281,7 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
 
 void Buff(Players p, int currentPlayer)
 {
-    printf("Kamu memiliki buff:\n");
+    printf("\nKamu memiliki buff:\n");
     if (ImmuneTP(ArrayPlayer(p)[currentPlayer]) == true)
     {
         printf("Imunitas Teleport\n");
@@ -409,7 +410,6 @@ void skill(Players *p, int currentPlayer)
             PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
             printf(" memakai skill ");
             PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-            printf("\n");
             UseSkill(p, inputs, currentPlayer);
             // DeleteSkill(&(PlayerSkills(*p)), inputs);
         }

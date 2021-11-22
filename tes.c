@@ -118,7 +118,7 @@ int main()
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
-
+            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 5);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
             printf("\nMasukkan Command: ");
@@ -143,6 +143,7 @@ int main()
                 }
                 else if (STRCOMP(CKata, "MAP"))
                 {
+                    puts("");
                     puts("|--------- POSISI PLAYER SEKARANG ---------|");
                     MAP(lvl, ArrPlayer);
                     printf("|----------------------------------------|\n");
