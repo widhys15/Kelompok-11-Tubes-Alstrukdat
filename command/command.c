@@ -3,10 +3,8 @@
 #include "../player/player.c"
 
 void PrintLokasiPlayer(Map M, Player p)
-/*
-I.S. M sebuah Map yang terdefinisi
-I.F. Menampilkan Map yang terdefinisi
-*/
+/* I.S. Player dan Map terdefinisi */
+/* F.S. Menampilkan lokasi player dari map yang terdefinisi */
 // KALO MAKE POINTER, YG ORIGINAL BAKAL BERUBAH
 {
     int lokasi = Posisi(p);
@@ -21,10 +19,8 @@ I.F. Menampilkan Map yang terdefinisi
 }
 
 void MAP(Map M, Players ps)
-/*
-I.S. M sebuah Map yang terdefinisi
-I.F. Menampilkan Map yang terdefinisi
-*/
+/* I.S. Player dan map terdefinisi */
+/* F.S. Menampilkan Map yang terdefinisi */
 // KALO MAKE POINTER, YG ORIGINAL BAKAL BERUBAH
 {
     int total = JumlahPlayer(ps);
@@ -35,14 +31,13 @@ I.F. Menampilkan Map yang terdefinisi
     }
 }
 char InfoPetak(Map M, int Petak)
+/* Menampilkan info petak dari input integer */
 {
     return Petak((M).map[Petak - 1]);
 }
 void INSPECT(Map M, int Petak)
-/*
-I.S. M sebuah Map yang terdefinisi
-I.F. Mereturn nilai tp pada petak yang ditentukan
-*/
+/* I.S. Map terdefinisi */
+/* F.S. Mereturn nilai teleport pada petak yang ditentukan dari input */
 {
     if (InfoPetak(M, Petak) == '#')
     {
@@ -63,6 +58,8 @@ I.F. Mereturn nilai tp pada petak yang ditentukan
 }
 
 void Teleport(Player *p, int currentPosition, Map M)
+/* I.S. Posisi player sekarang terdefinisi dari player dan map */
+/* F.S. Posisi player teleport sesuai map */
 {
     int outTP = Tp((M).map[currentPosition - 1]);
     if (outTP == -1)
@@ -123,6 +120,8 @@ void Teleport(Player *p, int currentPosition, Map M)
 }
 
 void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
+/* I.S. Player dan map terdefinisi */
+/* F.S. Posisi player berpindah sebesar roll yang didapat dan nilai roll berubah sesuai buff yang dimiliki player */
 {
     if (BuffPengecil(*p) == true)
     {
@@ -280,6 +279,8 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M)
 }
 
 void Buff(Players p, int currentPlayer)
+/* I.S. Player terdefinisi */
+/* F.S. Menampilkan buff yang aktif berdasarkan nilai boolean yang ada di player */
 {
     printf("\nKamu memiliki buff:\n");
     if (ImmuneTP(ArrayPlayer(p)[currentPlayer]) == true)
@@ -305,6 +306,8 @@ void Buff(Players p, int currentPlayer)
 }
 // ### SKILL ###
 void UseSkill(Players *p, int inputs, int currentPlayer)
+/* I.S. List skill di dalam player terdefinisi */
+/* F.S. Memakai skill yang diinput oleh player dan menjalankan fungsi sesuai skillnya */
 {
     int info = PrintInfoKe(PlayerSkills(ArrayPlayer(*p)[currentPlayer]), inputs);
     if (info == 1)
@@ -442,6 +445,8 @@ void UseSkill(Players *p, int inputs, int currentPlayer)
     }
 }
 void skill(Players *p, int currentPlayer)
+/* I.S. List skill di dalam player terdefinisi */
+/* F.S. Menampilkan skill player dan menerima input user untuk melakukan aksi seperti memakai atau membuang skill */
 {
     /*
     (PlayerSkills(ArrayPlayer(*p)[currentPlayer]))

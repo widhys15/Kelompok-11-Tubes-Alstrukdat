@@ -100,8 +100,6 @@ void DelFirst(List *L, address *P);
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 
-void DeleteSkill(List *L, infotype X);
-
 void DelP(List *L, infotype X);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
@@ -118,6 +116,12 @@ void DelAfter(List *L, address *Pdel, address Prec);
 /* I.S. List tidak kosong. Prec adalah anggota list  */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
+
+void DeleteSkill(List *L, infotype X);
+/* I.S. Sembarang */
+/* F.S. Elemen ke-X dari list dihapus dan didealokasi */
+/* Jika tidak ada elemen list dengan list ke-X maka list tetap dan memberikan peringatan */
+/* List mungkin menjadi kosong karena penghapusan */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo(List L);
@@ -156,15 +160,29 @@ void Konkat1(List *L1, List *L2, List *L3);
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 
 int random(int x);
+/* Menghasilkan nilai random dari suatu variabel */
 
 void PrintSkillKe(List L, int x);
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, akan menampilkan nama skill ke-x */
 
 void PrintMenuSkill(List L);
+/* I.S. List mungkin kosong */
+/* F.S. Akan menampilkan menu skill dengan menunjukkan skill yang ada */
 
 // void skill(List *L);
 
 void RandomSkill(List *L, int X);
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen list di akhir: elemen terakhir yang baru */
+/* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+
 int PrintInfoKe(List L, int X);
+/* Menampilkan nilai info pada elemen ke-x pada list */
+
 void InjectSkill(List *L, int infoSkill);
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen ke dalam list untuk proses debugging tiap skill dan buffnya */ 
 
 #endif

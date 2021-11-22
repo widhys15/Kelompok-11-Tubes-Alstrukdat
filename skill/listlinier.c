@@ -368,6 +368,13 @@ void PrintInfo(List L)
 };
 
 void PrintSkill(List L)
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, isi list akan dicetak kebawah sesuai dengan nama skillnya */
+/* Contoh : jika di dalam list ada elemen [1,2] maka akan dicetak */
+/* Kamu memiliki skill:
+    1. Pintu Ga Ke Mana Mana
+    2. Cermin Pengganda
+*/
 {
     if (!IsEmpty(L))
     {
@@ -474,6 +481,7 @@ void Konkat1(List *L1, List *L2, List *L3)
 };
 
 int random(int x)
+/* Menghasilkan nilai random dari suatu variabel */
 {
     int randoms;
     time_t t;
@@ -485,11 +493,10 @@ int random(int x)
     randoms = (randoms + x) % 10;
     return randoms;
 }
-void IsPembesarHoki(List L, int X)
-{
-    address P = First(L);
-}
+
 void PrintSkillKe(List L, int X)
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, akan menampilkan nama skill ke-x*/
 {
     address P = First(L);
     if (X == 1)
@@ -553,6 +560,8 @@ void PrintSkillKe(List L, int X)
 };
 
 void PrintMenuSkill(List L)
+/* I.S. List mungkin kosong */
+/* F.S. Akan menampilkan menu skill dengan menunjukkan skill yang ada */
 {
     PrintSkill(L);
     printf("\nTekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill.\n");
@@ -612,6 +621,7 @@ void RandomSkill(List *L, int X)
 };
 
 int PrintInfoKe(List L, int X)
+/* Menampilkan nilai info pada elemen ke-x pada list */
 {
     address P = First(L);
     if (X == 1)
@@ -683,6 +693,8 @@ int PrintInfoKe(List L, int X)
 };
 
 void InjectSkill(List *L, int infoSkill)
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen ke dalam list untuk proses debugging tiap skill dan buffnya */
 {
     address P = Alokasi(infoSkill);
     if (P != Nil)
