@@ -453,35 +453,45 @@ void skill(Players *p, int currentPlayer)
     STARTKATA();
     inputs = KataInt(CKata);
     boolean done = false;
-    while (inputs != 0)
+    boolean kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
+    while (inputs != 0 && kosong == false)
     {
-        if (inputs > 0)
+        if (inputs > 0 && inputs <= NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer]))))
         {
             puts("");
             PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
             printf(" memakai skill ");
             PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
             UseSkill(p, inputs, currentPlayer);
+            kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
             // DeleteSkill(&(PlayerSkills(*p)), inputs);
         }
-        else if (inputs < 0)
+        else if (inputs < 0 && inputs >= (-1 * NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer])))))
         {
             inputs = inputs * (-1);
             puts("");
             PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
             printf(" membuang skill ");
             PrintSkillKe((PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-            printf("\n");
             DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+            kosong = IsEmpty((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
         }
         // STARTKATA();
         // inputs = KataInt(CKata);
+        else if (inputs > NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer]))) || inputs < (-1 * NbElmt((PlayerSkills(ArrayPlayer(*p)[currentPlayer])))))
+        {
+            printf("\nInput anda salah! Skill yang bisa dipakai dan dibuang adalah skill yang ditampilkan.\n");
+        }
         PrintMenuSkill((PlayerSkills(ArrayPlayer(*p)[currentPlayer])));
         printf("\nMasukkan skill: ");
         STARTKATA();
         inputs = KataInt(CKata);
     };
-    if (inputs == 0)
+    if (kosong == true)
+    {
+        printf("\nSkill kosong sehingga tidak dapat dihapus atau dipakai\n");
+    }
+    if (inputs == 0 && kosong == false)
     {
         puts("");
         PrintNamePlayer((ArrayPlayer(*p)[currentPlayer]));
