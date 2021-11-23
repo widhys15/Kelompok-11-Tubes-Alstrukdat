@@ -3,11 +3,8 @@
 #include "array.h"
 
 void CreateMap(Map *M, int PPetak, char importMap[100])
-/* 
-I.S. M Sembarang
-I.F. Tebentuk Map dengan Neff sama dengan PPetak dan 
-tiap tp bernilai -1
-*/
+/* I.S. M Sembarang */
+/* F.S. Tebentuk Map dengan Neff sama dengan PPetak dan tiap tp bernilai -1 */
 {
     (*M).Neff = PPetak;
     for (int i = 0; i < PPetak; i++)
@@ -18,16 +15,15 @@ tiap tp bernilai -1
 }
 
 void PrintMap(Map *M)
-/*
-I.S. M sebuah Map yang terdefinisi
-I.F. Menampilkan Map yang terdefinisi
-*/
+/* I.S. M sebuah Map yang terdefinisi */
+/* F.S. Menampilkan Map yang terdefinisi */
 {
     for (int i = 0; i < (*M).Neff; i++)
     {
         printf("%c", Petak((*M).map[i]));
     }
 }
+
 // void PrintLokasiPlayer(Map M, int lokasi)
 // /*
 // I.S. M sebuah Map yang terdefinisi
@@ -43,10 +39,8 @@ I.F. Menampilkan Map yang terdefinisi
 // }
 
 void SetTeleport(Map *M, int In, int Out)
-/*
-I.S. M sebuah Map terdefinisi
-I.F. Mengset lokasi In dan Out teleport pada petak
-*/
+/* I.S. M sebuah Map terdefinisi */
+/* F.S. Mengset lokasi In dan Out teleport pada petak */
 {
     Tp((*M).map[In - 1]) = Out;
 }

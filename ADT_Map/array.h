@@ -20,21 +20,17 @@ typedef struct
 #define Tp(P) (P).tp
 
 void CreateMap(Map *M, int PPetak, char *importMap);
-/* 
-I.S. M Sembarang
-I.F. Tebentuk Map dengan Neff sama dengan PPetak dan 
-tiap tp bernilai -1
-*/
+/* I.S. M Sembarang */
+/* F.S. Tebentuk Map dengan Neff sama dengan PPetak dan tiap tp bernilai -1 */
+
 void PrintMap(Map *M);
-/*
-I.S. M sebuah Map yang terdefinisi
-I.F. Menampilkan Map yang terdefinisi
-*/
+/* I.S. M sebuah Map yang terdefinisi */
+/* F.S. Menampilkan Map yang terdefinisi */
+
 // void PrintLokasiPlayer(Map M, int lokasi);
 
 void SetTeleport(Map *M, int In, int Out);
-/*
-I.S. M sebuah Map terdefinisi
-I.F. Mengset lokasi In dan Out teleport pada petak
-*/
+/* I.S. M sebuah Map terdefinisi */
+/* F.S. Mengset lokasi In dan Out teleport pada petak */
+
 #endif

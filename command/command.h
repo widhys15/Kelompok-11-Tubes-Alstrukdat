@@ -1,8 +1,8 @@
 #ifndef command_H
 #define command_H
 #include "../boolean.h"
-#include "../array/array.h"
-#include "../player/player.h"
+#include "../ADT_Map/array.h"
+#include "../ADT_Player/player.h"
 #include <time.h>
 
 void PrintLokasiPlayer(Map M, Player p);

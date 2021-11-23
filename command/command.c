@@ -1,6 +1,6 @@
 #include "command.h"
-#include "../array/array.c"
-#include "../player/player.c"
+#include "../ADT_Map/array.c"
+#include "../ADT_Player/player.c"
 
 void PrintLokasiPlayer(Map M, Player p)
 /* I.S. Player dan Map terdefinisi */

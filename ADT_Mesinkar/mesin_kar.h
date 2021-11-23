@@ -26,6 +26,8 @@ void ADV();
    F.S. : CC adalah karakter berikutnya dari CC yang lama,
           CC mungkin = MARK
           Jika  CC = MARK maka EOP akan menyala (true) */
+
+/* Config file */
 void C_START(char *c);
 void C_ADV();
 #endif

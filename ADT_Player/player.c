@@ -1,13 +1,19 @@
 #include "player.h"
 #include <stdio.h>
-#include "../mesinkata/mesin_kata.c"
-#include "../mesinkar/mesin_kar.c"
-#include "../skill/listlinier.c"
+#include "../ADT_Mesinkata/mesin_kata.c"
+#include "../ADT_Mesinkar/mesin_kar.c"
+#include "../ADT_Skill/listlinier.c"
+
 void CreateEmptyArrayPlayer(Players *p)
+/* I.S. sembarang             */
+/* F.S. Terbentuk array player kosong */
 {
     JumlahPlayer(*p) = 0;
 }
+
 void AddPlayer(Players *p, int jumlahPlayer)
+/* I.S. p terdefinisi */
+/* F.S. Menambahkan player sejumlah input ke dalam array players */
 {
     JumlahPlayer(*p) = jumlahPlayer;
     for (int i = 0; i < jumlahPlayer; i++)
@@ -15,7 +21,10 @@ void AddPlayer(Players *p, int jumlahPlayer)
         CreatePlayer(&(ArrayPlayer(*p)[i]), i + 1);
     }
 }
+
 void CreatePlayer(Player *p, int playerKe)
+/* I.S. p terdefinisi */
+/* F.S. Mengisi data-data seperti nama, posisi, dan list skill ke dalam player */
 {
     printf("Nama Player %d: ", playerKe);
     STARTKATA();
@@ -33,7 +42,10 @@ void CreatePlayer(Player *p, int playerKe)
     // BuffPengecil(*p) = true;
     // Cermin(*p) = true;
 }
+
 void PrintNamePlayer(Player p)
+/* I.S. p terdefinisi */
+/* F.S. Menampilkan nama player */
 {
     int length = NameLength(p);
     for (int i = 0; i < length; i++)
