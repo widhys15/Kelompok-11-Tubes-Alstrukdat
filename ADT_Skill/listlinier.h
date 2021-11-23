@@ -183,6 +183,6 @@ int PrintInfoKe(List L, int X);
 
 void InjectSkill(List *L, int infoSkill);
 /* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen ke dalam list untuk proses debugging tiap skill dan buffnya */ 
+/* F.S. Melakukan alokasi sebuah elemen ke dalam list untuk proses debugging tiap skill dan buffnya */
 
 #endif

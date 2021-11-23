@@ -1,6 +1,7 @@
 #include "command.h"
 #include "../ADT_Map/array.c"
-#include "../ADT_Player/player.c"
+// #include "../ADT_Player/player.c"
+#include "../ADT_Stack/stack.c"
 
 void PrintLokasiPlayer(Map M, Player p)
 /* I.S. Player dan Map terdefinisi */
@@ -514,9 +515,9 @@ void skill(Players *p, int currentPlayer)
     // ### CEK VALID INPUT END ###
 }
 
-void CopyArrayPlayer(Players copy, Players *paste)
+void UNDO(Stack *s, Players *ps)
 {
-    (*paste) = copy;
+    Pop(s, ps);
 }
 
 // int test2(List L, int x)

@@ -2,7 +2,8 @@
 #define command_H
 #include "../boolean.h"
 #include "../ADT_Map/array.h"
-#include "../ADT_Player/player.h"
+// #include "../ADT_Player/player.h"
+#include "../ADT_Stack/stack.h"
 #include <time.h>
 
 void PrintLokasiPlayer(Map M, Player p);
@@ -40,8 +41,5 @@ void Buff(Players p, int currentPlayer);
 /* I.S. Player terdefinisi */
 /* F.S. Menampilkan buff yang aktif berdasarkan nilai boolean yang ada di player */
 
-void CopyArrayPlayer(Players copy, Players *paste);
-/* I.S. */
-/* F.S. */
-
+void UNDO(Stack *s, Players *ps);
 #endif

@@ -3,7 +3,6 @@
 #include "../ADT_Mesinkata/mesin_kata.c"
 #include "../ADT_Mesinkar/mesin_kar.c"
 #include "../ADT_Skill/listlinier.c"
-
 void CreateEmptyArrayPlayer(Players *p)
 /* I.S. sembarang             */
 /* F.S. Terbentuk array player kosong */

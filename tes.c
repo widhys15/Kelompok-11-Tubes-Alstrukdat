@@ -10,6 +10,8 @@
 // Include Player
 // #include "player/player.h"
 // #include "player/player.c"
+// #include "ADT_Skill/listlinier.c"
+// #include "ADT_Skill/listlinier.h"
 #include "command/command.h"
 #include "command/command.c"
 
@@ -98,52 +100,33 @@ int main()
         }
         // Import setTeleport end
 
+        // Decalare Stack for Undo
+        Stack Round;
+        CreateEmptyStack(&Round);
+        Push(&Round, ArrPlayer); // Untuk Round 0 atau awal game
+
         // ### TEST GAME ###
-        List SkillPlayer1;
         boolean EndGame = false;
         int currentPlayer = 0;
         int RondeKe = 1;
-        Players PR1;
         while (!EndGame)
         {
             if (currentPlayer == JumlahPlayer(ArrPlayer))
             {
+                puts("### NEXNYA FUNGSI PUSH ###");
+                Push(&Round, ArrPlayer);
                 RondeKe++;
                 currentPlayer = 0;
             }
-            // ### TEST COPY PASTE DATA START ###
-            if (RondeKe == 1)
-            {
-                printf("COPY DATA DI AKHIR RONDE KE 1\n");
-                CreateEmpty(&SkillPlayer1);
-                int tmp = NbElmt((PlayerSkills(ArrayPlayer(ArrPlayer)[0])));
-                for (int i = 1; i <= tmp; i++)
-                {
-                    int infoSkill = PrintInfoKe((PlayerSkills(ArrayPlayer(ArrPlayer)[0])), i);
-                    // MASUKIN DATA SKILL KE SkillPlayer1
-                    address P = Alokasi(infoSkill);
-                    if (P != Nil)
-                    {
-                        if (NbElmt(SkillPlayer1) < 10)
-                        {
 
-                            InsertLast(&SkillPlayer1, P);
-                        }
-                        else
-                        {
-                            printf("Skill sudah penuh\n");
-                        }
-                    }
-                }
-            }
-            if (RondeKe == 3)
-            {
-                (PlayerSkills(ArrayPlayer(ArrPlayer)[1])) = SkillPlayer1;
-                printf("\nENDGAME\n");
-                EndGame = true;
-                break;
-            }
-            // ### TEST COPY PASTE DATA END ###
+            // if (RondeKe == 3)
+            // {
+            //     printf("\nENDGAME\n");
+            //     EndGame = true;
+            //     break;
+            // }
+
+        Z:
             printf("\nRonde Ke-%d\n", RondeKe);
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
             MAP(lvl, ArrPlayer);
@@ -153,7 +136,7 @@ int main()
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
-            // InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 1);
+            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 1);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
             printf("\nMasukkan Command: ");
@@ -186,6 +169,20 @@ int main()
                 else if (STRCOMP(CKata, "BUFF"))
                 {
                     Buff(ArrPlayer, currentPlayer);
+                }
+                else if (STRCOMP(CKata, "UNDO"))
+                {
+                    puts("INI FUNGSI UNDO");
+                    RondeKe = Top(Round) + 1;
+                    UNDO(&Round, &ArrPlayer);
+                    currentPlayer = 0;
+                    goto Z;
+                }
+                else if (STRCOMP(CKata, "TMP"))
+                {
+                    puts("TEST LIST SKILL");
+                    printf("INDEX DI TOP = %d", Top(Round));
+                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayerStack(Round))[1])));
                 }
                 printf("\nMasukkan Command: ");
                 STARTKATA();
@@ -227,6 +224,20 @@ int main()
                 else if (STRCOMP(CKata, "BUFF"))
                 {
                     Buff(ArrPlayer, currentPlayer);
+                }
+                else if (STRCOMP(CKata, "UNDO"))
+                {
+                    puts("INI FUNGSI UNDO");
+                    RondeKe = Top(Round) + 1;
+                    UNDO(&Round, &ArrPlayer);
+                    currentPlayer = 0;
+                    goto Z;
+                }
+                else if (STRCOMP(CKata, "TMP"))
+                {
+                    puts("TEST LIST SKILL");
+                    printf("INDEX DI TOP = %d", Top(Round));
+                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayerStack(Round))[1])));
                 }
                 printf("\nMasukkan Command: ");
                 STARTKATA();
@@ -292,26 +303,44 @@ int main()
         //     PrintSkill((PlayerSkills(ArrayPlayer(ArrPlayer)[1])));
 
         // ### TEST COPY DATA PLAYERS ###
-        puts("### DATA RONDE KE 1 ###");
-        PrintMenuSkill(SkillPlayer1);
-        // if (ImmuneTP(ArrayPlayer(PR1)[0]))
+        // puts("### DATA RONDE KE 1 ###");
+        // PrintMenuSkill(PlayerSkills(PR1));
+        // puts("Print Buff: \n");
+        // if (ImmuneTP(PR1) == true)
         // {
-        //     printf("ADA IMMUNE TP DI AKHIR RONDE 1\n");
+        //     printf("Imunitas Teleport\n");
         // }
-        // else
+        // if (Cermin(PR1) == true)
         // {
-        //     printf("GK ADA IMMUNE DI AKHIR RONDE 1 \n");
+        //     printf("Cermin Pengganda\n");
         // }
-        puts("### DATA RONDE KE 2 ###");
-        PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayer)[1])));
-        // if (ImmuneTP(ArrayPlayer(ArrPlayer)[0]))
+        // if (BuffPembesar(PR1) == true)
         // {
-        //     printf("ADA IMMUNE TP\n");
+        //     printf("Senter Pembesar Hoki\n");
         // }
-        // else
+        // if (BuffPengecil(PR1) == true)
         // {
-        //     printf("GK ADA IMMUNE\n");
+        //     printf("Senter Pengecil Hoki\n");
         // }
+        // // if (ImmuneTP(ArrayPlayer(PR1)[0]))
+        // // {
+        // //     printf("ADA IMMUNE TP DI AKHIR RONDE 1\n");
+        // // }
+        // // else
+        // // {
+        // //     printf("GK ADA IMMUNE DI AKHIR RONDE 1 \n");
+        // // }
+        // puts("### DATA RONDE KE 2 ###");
+        // PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayer)[0])));
+        // Buff(ArrPlayer, 0);
+        // // if (ImmuneTP(ArrayPlayer(ArrPlayer)[0]))
+        // // {
+        // //     printf("ADA IMMUNE TP\n");
+        // // }
+        // // else
+        // // {
+        // //     printf("GK ADA IMMUNE\n");
+        // // }
 
     } // END IF
     else
