@@ -615,7 +615,7 @@ void RandomSkill(List *L, int X)
         }
         else
         {
-            printf("Skill sudah penuh\n");
+            printf("\nSkill sudah penuh");
         }
     }
 };
@@ -703,10 +703,6 @@ void InjectSkill(List *L, int infoSkill)
         {
 
             InsertLast(L, P);
-        }
-        else
-        {
-            printf("Skill sudah penuh\n");
         }
     }
 }

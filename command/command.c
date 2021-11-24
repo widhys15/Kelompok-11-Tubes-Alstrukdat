@@ -85,6 +85,8 @@ void Teleport(Player *p, int currentPosition, Map M)
                 if ((CKata.TabKata[1] != 'N') && (CKata.TabKata[1] != 'Y'))
                 {
                     puts("Jawab antara Y atau N");
+                    printf("Apakah ");
+                    PrintNamePlayer(*p);
                     printf(" ingin teleport (Y/N) ? ");
                     STARTKATA();
                 }
