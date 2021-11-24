@@ -384,23 +384,31 @@ void PrintSkill(List L)
         while (P != Nil)
         {
             printf("%d. ", i);
-            if (Info(P) == 1)
+            if (Info(P) >= 1 && Info(P) <= 10)
             {
                 printf("Pintu Ga Ke Mana Mana\n");
             }
-            else if (Info(P) == 2)
+            else if (Info(P) >= 11 && Info(P) <= 20)
+            {
+                printf("Mesin Waktu\n");
+            }
+            else if (Info(P) >= 21 && Info(P) <= 30)
+            {
+                printf("Baling-Baling Jambu\n");
+            }
+            else if (Info(P) >= 31 && Info(P) <= 36)
             {
                 printf("Cermin Pengganda\n");
             }
-            else if (Info(P) == 3 || Info(P) == 4)
+            else if (Info(P) >= 37 && Info(P) <= 51)
             {
                 printf("Senter Pembesar Hoki\n");
             }
-            else if (Info(P) == 5 || Info(P) == 6)
+            else if (Info(P) >= 52 && Info(P) <= 66)
             {
                 printf("Senter Pengecil Hoki\n");
             }
-            else if (Info(P) == 7)
+            else if (Info(P) >= 67 && Info(P) <= 70)
             {
                 printf("Mesin Penukar Posisi\n");
             }
@@ -484,13 +492,11 @@ int random(int x)
 /* Menghasilkan nilai random dari suatu variabel */
 {
     int randoms;
-    time_t t;
-    srand((unsigned)(time(&t)));
-    for (int i = 1; i < 10; i++)
-    {
-        randoms = rand() % 10;
-    }
-    randoms = (randoms + x) % 10;
+    int lower = 1;
+    int upper = 100;
+    srand(time(NULL));
+    randoms = (rand() % (upper-lower+1) + lower);
+    randoms = (randoms + x) % upper;
     return randoms;
 }
 
@@ -501,23 +507,31 @@ void PrintSkillKe(List L, int X)
     address P = First(L);
     if (X == 1)
     {
-        if (Info(P) == 1)
+        if (Info(P) >= 1 && Info(P) <= 10)
         {
             printf("Pintu Ga Ke Mana Mana\n");
         }
-        else if (Info(P) == 2)
+        else if (Info(P) >= 11 && Info(P) <= 20)
+        {
+            printf("Mesin Waktu\n");
+        }
+        else if (Info(P) >= 21 && Info(P) <= 30)
+        {
+            printf("Baling-Baling Jambu\n");
+        }
+        else if (Info(P) >= 31 && Info(P) <= 36)
         {
             printf("Cermin Pengganda\n");
         }
-        else if (Info(P) == 3 || Info(P) == 4)
+        else if (Info(P) >= 37 && Info(P) <= 51)
         {
             printf("Senter Pembesar Hoki\n");
         }
-        else if (Info(P) == 5 || Info(P) == 6)
+        else if (Info(P) >= 52 && Info(P) <= 66)
         {
             printf("Senter Pengecil Hoki\n");
         }
-        else if (Info(P) == 7)
+        else if (Info(P) >= 67 && Info(P) <= 70)
         {
             printf("Mesin Penukar Posisi\n");
         }
@@ -532,23 +546,31 @@ void PrintSkillKe(List L, int X)
         {
             P = Next(P);
         }
-        if (Info(P) == 1)
+        if (Info(P) >= 1 && Info(P) <= 10)
         {
             printf("Pintu Ga Ke Mana Mana\n");
         }
-        else if (Info(P) == 2)
+        else if (Info(P) >= 11 && Info(P) <= 20)
+        {
+            printf("Mesin Waktu\n");
+        }
+        else if (Info(P) >= 21 && Info(P) <= 30)
+        {
+            printf("Baling-Baling Jambu\n");
+        }
+        else if (Info(P) >= 31 && Info(P) <= 36)
         {
             printf("Cermin Pengganda\n");
         }
-        else if (Info(P) == 3 || Info(P) == 4)
+        else if (Info(P) >= 37 && Info(P) <= 51)
         {
             printf("Senter Pembesar Hoki\n");
         }
-        else if (Info(P) == 5 || Info(P) == 6)
+        else if (Info(P) >= 52 && Info(P) <= 66)
         {
             printf("Senter Pengecil Hoki\n");
         }
-        else if (Info(P) == 7)
+        else if (Info(P) >= 67 && Info(P) <= 70)
         {
             printf("Mesin Penukar Posisi\n");
         }
@@ -626,34 +648,7 @@ int PrintInfoKe(List L, int X)
     address P = First(L);
     if (X == 1)
     {
-        if (Info(P) == 1)
-        {
-            return 1;
-        }
-        else if (Info(P) == 2)
-        {
-            return 2;
-        }
-        else if (Info(P) == 3)
-        {
-            return 3;
-        }
-        else if (Info(P) == 4)
-        {
-            return 4;
-        }
-        else if (Info(P) == 5)
-        {
-            return 5;
-        }
-        else if (Info(P) == 6)
-        {
-            return 65;
-        }
-        else if (Info(P) == 7)
-        {
-            return 7;
-        }
+        return Info(P);
     }
     else
     {
@@ -661,34 +656,7 @@ int PrintInfoKe(List L, int X)
         {
             P = Next(P);
         }
-        if (Info(P) == 1)
-        {
-            return 1;
-        }
-        else if (Info(P) == 2)
-        {
-            return 2;
-        }
-        else if (Info(P) == 3)
-        {
-            return 3;
-        }
-        else if (Info(P) == 4)
-        {
-            return 4;
-        }
-        else if (Info(P) == 5)
-        {
-            return 5;
-        }
-        else if (Info(P) == 6)
-        {
-            return 65;
-        }
-        else if (Info(P) == 7)
-        {
-            return 7;
-        }
+        return Info(P);
     }
 };
 

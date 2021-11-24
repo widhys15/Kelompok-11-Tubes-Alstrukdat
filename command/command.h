@@ -29,11 +29,11 @@ void ROLL(int minRoll, int maxRoll, int maxPetak, Player *p, Map M);
 /* I.S. Player dan map terdefinisi */
 /* F.S. Posisi player berpindah sebesar roll yang didapat dan nilai roll berubah sesuai buff yang dimiliki player */
 
-void UseSkill(Players *p, int inputs, int currentPlayer);
+void UseSkill(Players *p, int inputs, int currentPlayer, int minRoll, int maxRoll, Map M, int maxPetak);
 /* I.S. List skill di dalam player terdefinisi */
 /* F.S. Memakai skill yang diinput oleh player dan menjalankan fungsi sesuai skillnya */
 
-void skill(Players *p, int currentPlayer);
+void skill(Players *p, int currentPlayer, int minRoll, int maxRoll, Map M, int maxPetak);
 /* I.S. List skill di dalam player terdefinisi */
 /* F.S. Menampilkan skill player dan menerima input user untuk melakukan aksi seperti memakai atau membuang skill */
 

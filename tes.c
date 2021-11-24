@@ -130,13 +130,14 @@ int main()
             printf("\nRonde Ke-%d\n", RondeKe);
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
             MAP(lvl, ArrPlayer);
-            printf("|----------------------------------------|\n");
+            printf("|------------------------------------------|\n");
 
             //### Display Giliran Player Start ###
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
-            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 1);
+            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 25);
+            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 8);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
             printf("\nMasukkan Command: ");
@@ -156,7 +157,7 @@ int main()
                 else if (STRCOMP(CKata, "SKILL"))
                 {
                     PlayerSkills((ArrayPlayer(ArrPlayer)[currentPlayer]));
-                    skill(&ArrPlayer, currentPlayer);
+                    skill(&ArrPlayer, currentPlayer, minRoll, maxRoll, lvl, maxPetak);
                     // oldSkill(&ArrayPlayer(ArrPlayer)[currentPlayer]);
                 }
                 else if (STRCOMP(CKata, "MAP"))
