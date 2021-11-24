@@ -3,7 +3,8 @@
 #include "../boolean.h"
 #include "../ADT_Map/array.h"
 // #include "../ADT_Player/player.h"
-#include "../ADT_Stack/stack.h"
+// #include "../ADT_Stack/stack.h"
+#include "../ADT_Stack/stacklist.h"
 #include <time.h>
 
 void PrintLokasiPlayer(Map M, Player p);

@@ -109,6 +109,7 @@ int main()
         boolean EndGame = false;
         int currentPlayer = 0;
         int RondeKe = 1;
+        int PlayerUsedUndo;
         while (!EndGame)
         {
             if (currentPlayer == JumlahPlayer(ArrPlayer))
@@ -118,14 +119,6 @@ int main()
                 RondeKe++;
                 currentPlayer = 0;
             }
-
-            // if (RondeKe == 3)
-            // {
-            //     printf("\nENDGAME\n");
-            //     EndGame = true;
-            //     break;
-            // }
-
         Z:
             printf("\nRonde Ke-%d\n", RondeKe);
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
@@ -174,7 +167,8 @@ int main()
                 else if (STRCOMP(CKata, "UNDO"))
                 {
                     puts("INI FUNGSI UNDO");
-                    RondeKe = Top(Round) + 1;
+                    PlayerUsedUndo = currentPlayer;
+                    RondeKe = InfoRonde(Round) + 1;
                     UNDO(&Round, &ArrPlayer);
                     currentPlayer = 0;
                     goto Z;
@@ -182,11 +176,13 @@ int main()
                 else if (STRCOMP(CKata, "TMP"))
                 {
                     puts("TEST LIST SKILL");
-                    printf("INDEX DI TOP = %d", Top(Round));
-                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayerStack(Round))[1])));
+                    printf("INDEX DI TOP = %d", InfoRonde(Round));
+                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrayPlayerStack(Round))[0])));
                 }
                 printf("\nMasukkan Command: ");
+                CKata.TabKata[1] = '.';
                 STARTKATA();
+                printKata(CKata);
             }
             // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN END ###
 
@@ -229,7 +225,8 @@ int main()
                 else if (STRCOMP(CKata, "UNDO"))
                 {
                     puts("INI FUNGSI UNDO");
-                    RondeKe = Top(Round) + 1;
+                    PlayerUsedUndo = currentPlayer;
+                    RondeKe = InfoRonde(Round) + 1;
                     UNDO(&Round, &ArrPlayer);
                     currentPlayer = 0;
                     goto Z;
@@ -237,8 +234,8 @@ int main()
                 else if (STRCOMP(CKata, "TMP"))
                 {
                     puts("TEST LIST SKILL");
-                    printf("INDEX DI TOP = %d", Top(Round));
-                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrPlayerStack(Round))[1])));
+                    printf("INDEX DI TOP = %d", InfoRonde(Round));
+                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrayPlayerStack(Round))[0])));
                 }
                 printf("\nMasukkan Command: ");
                 STARTKATA();
