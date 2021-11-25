@@ -322,210 +322,210 @@ void UseSkill(Players *p, int inputs, int currentPlayer, int minRoll, int maxRol
         // delete elemen di skill
     }
     else if (info >= 11 && info <= 20)
+    {
+        int chosenPlayer;
+        srand(time(0));
+        int num = (rand() % (maxRoll - minRoll + 1)) + minRoll;
+        if (JumlahPlayer(*p) == 2)
         {
-            int chosenPlayer;
-            srand(time(0));
-            int num = (rand() % (maxRoll - minRoll + 1)) + minRoll;
-            if (JumlahPlayer(*p) == 2)
+            if (currentPlayer == JumlahPlayer(*p) - 1)
             {
-                if (currentPlayer == JumlahPlayer(*p) - 1)
-                {
-                    chosenPlayer = 0;
-                }
-                else
-                {
-                    chosenPlayer = currentPlayer + 1;
-                }
-                int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
-                int backward = CPosisi - num;
-                if (InfoPetak(M, backward) != '#' && backward > 0)
-                {
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" dapat mundur.\n");
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" mundur %d langkah.\n", num);
-                    // Change posisi chosenPlayer
-                    Posisi(ArrayPlayer(*p)[chosenPlayer]) = backward;
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
-                    Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
-                    puts("");
-                    DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-                }
-                else if (InfoPetak(M, backward) == '#' || backward < 0)
-                {
-                    printf("Mundur %d\n", num);
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" tidak dapat bergerak.\n");
-                }           
+                chosenPlayer = 0;
             }
             else
             {
-                int arrplayer[4] = {0, 1, 2, 3};  // MAX PLAYER
-                int choice[JumlahPlayer(*p) - 1]; // Array yg bukan currentPlayer
-                int j = 0;
-                // Membuat array tanpa currentPlayer
-                puts("Player yang ingin dimundurkan posisinya: ");
-                for (int i = 0; i < 4; i++)
+                chosenPlayer = currentPlayer + 1;
+            }
+            int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
+            int backward = CPosisi - num;
+            if (InfoPetak(M, backward) != '#' && backward > 0)
+            {
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" dapat mundur.\n");
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" mundur %d langkah.\n", num);
+                // Change posisi chosenPlayer
+                Posisi(ArrayPlayer(*p)[chosenPlayer]) = backward;
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
+                Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
+                puts("");
+                DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+            }
+            else if (InfoPetak(M, backward) == '#' || backward < 0)
+            {
+                printf("Mundur %d\n", num);
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" tidak dapat bergerak.\n");
+            }
+        }
+        else
+        {
+            int arrplayer[4] = {0, 1, 2, 3};  // MAX PLAYER
+            int choice[JumlahPlayer(*p) - 1]; // Array yg bukan currentPlayer
+            int j = 0;
+            // Membuat array tanpa currentPlayer
+            puts("Player yang ingin dimundurkan posisinya: ");
+            for (int i = 0; i < 4; i++)
+            {
+                if ((currentPlayer != arrplayer[i]) && (j < JumlahPlayer(*p) - 1))
                 {
-                    if ((currentPlayer != arrplayer[i]) && (j < JumlahPlayer(*p) - 1))
-                    {
-                        choice[j] = arrplayer[i];
-                        // Tampilan pilihan player
+                    choice[j] = arrplayer[i];
+                    // Tampilan pilihan player
 
-                        printf("%d. ", j + 1);
-                        PrintNamePlayer((ArrayPlayer(*p)[choice[j]]));
-                        puts("");
-                        j++;
-                    }
-                }
-                printf("\nMasukkan Player: ");
-                STARTKATA();
-                // ### CEK VALID INPUT START ###
-                boolean valid = false;
-                int jawaban = KataInt(CKata);
-                do
-                {
-                    if ((jawaban < 1) && (jawaban >= JumlahPlayer(*p)))
-                    {
-                        printf("Jawab dengan nilai antara 1 sampai %d", JumlahPlayer(*p) - 1);
-                        printf("Masukkan Player: ");
-                        STARTKATA();
-                        jawaban = KataInt(CKata);
-                    }
-                    else
-                    {
-                        valid = true;
-                    }
-                } while (!valid);
-                // ### CEK VALID INPUT END ###
-                chosenPlayer = choice[jawaban - 1];
-                int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
-                int backward = CPosisi - num;
-                if (InfoPetak(M, backward) != '#' && backward > 0)
-                {
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" dapat mundur.\n");
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" mundur %d langkah.\n", num);
-                    // Change posisi chosenPlayer
-                    Posisi(ArrayPlayer(*p)[chosenPlayer]) = backward;
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
-                    Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
+                    printf("%d. ", j + 1);
+                    PrintNamePlayer((ArrayPlayer(*p)[choice[j]]));
                     puts("");
-                    DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+                    j++;
                 }
-                else if (InfoPetak(M, backward) == '#' || backward < 0)
-                {
-                    printf("Mundur %d\n", num);
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" tidak dapat bergerak.\n");
-                } 
             }
-        }
-    else if (info >= 21 && info <= 30)
-        {
-            int chosenPlayer;
-            srand(time(0));
-            int num = (rand() % (maxRoll - minRoll + 1)) + minRoll;
-            if (JumlahPlayer(*p) == 2)
+            printf("\nMasukkan Player: ");
+            STARTKATA();
+            // ### CEK VALID INPUT START ###
+            boolean valid = false;
+            int jawaban = KataInt(CKata);
+            do
             {
-                if (currentPlayer == JumlahPlayer(*p) - 1)
+                if ((jawaban < 1) && (jawaban >= JumlahPlayer(*p)))
                 {
-                    chosenPlayer = 0;
+                    printf("Jawab dengan nilai antara 1 sampai %d", JumlahPlayer(*p) - 1);
+                    printf("Masukkan Player: ");
+                    STARTKATA();
+                    jawaban = KataInt(CKata);
                 }
                 else
                 {
-                    chosenPlayer = currentPlayer + 1;
+                    valid = true;
                 }
-                int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
-                int forward = CPosisi + num;
-                if (InfoPetak(M, forward) != '#' && forward < maxPetak)
-                {
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" dapat maju.\n");
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" maju %d langkah.\n", num);
-                    // Change posisi chosenPlayer
-                    Posisi(ArrayPlayer(*p)[chosenPlayer]) = forward;
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
-                    Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
-                    puts("");
-                    DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-                }
-                else if (InfoPetak(M, forward) == '#' || forward > maxPetak)
-                {
-                    printf("Harusnya maju %d\n", num);
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" tidak dapat bergerak.\n");
-                }           
+            } while (!valid);
+            // ### CEK VALID INPUT END ###
+            chosenPlayer = choice[jawaban - 1];
+            int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
+            int backward = CPosisi - num;
+            if (InfoPetak(M, backward) != '#' && backward > 0)
+            {
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" dapat mundur.\n");
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" mundur %d langkah.\n", num);
+                // Change posisi chosenPlayer
+                Posisi(ArrayPlayer(*p)[chosenPlayer]) = backward;
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
+                Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
+                puts("");
+                DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+            }
+            else if (InfoPetak(M, backward) == '#' || backward < 0)
+            {
+                printf("Mundur %d\n", num);
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" tidak dapat bergerak.\n");
+            }
+        }
+    }
+    else if (info >= 21 && info <= 30)
+    {
+        int chosenPlayer;
+        srand(time(0));
+        int num = (rand() % (maxRoll - minRoll + 1)) + minRoll;
+        if (JumlahPlayer(*p) == 2)
+        {
+            if (currentPlayer == JumlahPlayer(*p) - 1)
+            {
+                chosenPlayer = 0;
             }
             else
             {
-                int arrplayer[4] = {0, 1, 2, 3};  // MAX PLAYER
-                int choice[JumlahPlayer(*p) - 1]; // Array yg bukan currentPlayer
-                int j = 0;
-                // Membuat array tanpa currentPlayer
-                puts("Player yang ingin dimajukan posisinya: ");
-                for (int i = 0; i < 4; i++)
-                {
-                    if ((currentPlayer != arrplayer[i]) && (j < JumlahPlayer(*p) - 1))
-                    {
-                        choice[j] = arrplayer[i];
-                        // Tampilan pilihan player
-                        printf("%d. ", j + 1);
-                        PrintNamePlayer((ArrayPlayer(*p)[choice[j]]));
-                        puts("");
-                        j++;
-                    }
-                }
-                printf("\nMasukkan Player: ");
-                STARTKATA();
-                // ### CEK VALID INPUT START ###
-                boolean valid = false;
-                int jawaban = KataInt(CKata);
-                do
-                {
-                    if ((jawaban < 1) && (jawaban >= JumlahPlayer(*p)))
-                    {
-                        printf("Jawab dengan nilai antara 1 sampai %d", JumlahPlayer(*p) - 1);
-                        printf("Masukkan Player: ");
-                        STARTKATA();
-                        jawaban = KataInt(CKata);
-                    }
-                    else
-                    {
-                        valid = true;
-                    }
-                } while (!valid);
-                // ### CEK VALID INPUT END ###
-                chosenPlayer = choice[jawaban - 1];
-                int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
-                int forward = CPosisi + num;
-                if (InfoPetak(M, forward) != '#' && forward < maxPetak)
-                {
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" dapat maju.\n");
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" maju %d langkah.\n", num);
-                    // Change posisi chosenPlayer
-                    Posisi(ArrayPlayer(*p)[chosenPlayer]) = forward;
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
-                    Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
-                    puts("");
-                    DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
-                }
-                else if (InfoPetak(M, forward) == '#' || forward > maxPetak)
-                {
-                    printf("Harusnya maju %d\n", num);
-                    PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
-                    printf(" tidak dapat bergerak.\n");
-                } 
+                chosenPlayer = currentPlayer + 1;
+            }
+            int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
+            int forward = CPosisi + num;
+            if (InfoPetak(M, forward) != '#' && forward < maxPetak)
+            {
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" dapat maju.\n");
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" maju %d langkah.\n", num);
+                // Change posisi chosenPlayer
+                Posisi(ArrayPlayer(*p)[chosenPlayer]) = forward;
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
+                Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
+                puts("");
+                DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+            }
+            else if (InfoPetak(M, forward) == '#' || forward > maxPetak)
+            {
+                printf("Harusnya maju %d\n", num);
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" tidak dapat bergerak.\n");
             }
         }
+        else
+        {
+            int arrplayer[4] = {0, 1, 2, 3};  // MAX PLAYER
+            int choice[JumlahPlayer(*p) - 1]; // Array yg bukan currentPlayer
+            int j = 0;
+            // Membuat array tanpa currentPlayer
+            puts("Player yang ingin dimajukan posisinya: ");
+            for (int i = 0; i < 4; i++)
+            {
+                if ((currentPlayer != arrplayer[i]) && (j < JumlahPlayer(*p) - 1))
+                {
+                    choice[j] = arrplayer[i];
+                    // Tampilan pilihan player
+                    printf("%d. ", j + 1);
+                    PrintNamePlayer((ArrayPlayer(*p)[choice[j]]));
+                    puts("");
+                    j++;
+                }
+            }
+            printf("\nMasukkan Player: ");
+            STARTKATA();
+            // ### CEK VALID INPUT START ###
+            boolean valid = false;
+            int jawaban = KataInt(CKata);
+            do
+            {
+                if ((jawaban < 1) && (jawaban >= JumlahPlayer(*p)))
+                {
+                    printf("Jawab dengan nilai antara 1 sampai %d", JumlahPlayer(*p) - 1);
+                    printf("Masukkan Player: ");
+                    STARTKATA();
+                    jawaban = KataInt(CKata);
+                }
+                else
+                {
+                    valid = true;
+                }
+            } while (!valid);
+            // ### CEK VALID INPUT END ###
+            chosenPlayer = choice[jawaban - 1];
+            int CPosisi = Posisi(ArrayPlayer(*p)[chosenPlayer]);
+            int forward = CPosisi + num;
+            if (InfoPetak(M, forward) != '#' && forward < maxPetak)
+            {
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" dapat maju.\n");
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" maju %d langkah.\n", num);
+                // Change posisi chosenPlayer
+                Posisi(ArrayPlayer(*p)[chosenPlayer]) = forward;
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" berada di petak %d.\n", Posisi(ArrayPlayer(*p)[chosenPlayer]));
+                Teleport(&(ArrayPlayer(*p)[chosenPlayer]), Posisi(ArrayPlayer(*p)[chosenPlayer]), M);
+                puts("");
+                DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
+            }
+            else if (InfoPetak(M, forward) == '#' || forward > maxPetak)
+            {
+                printf("Harusnya maju %d\n", num);
+                PrintNamePlayer((ArrayPlayer(*p)[chosenPlayer]));
+                printf(" tidak dapat bergerak.\n");
+            }
+        }
+    }
     else if (info >= 31 && info <= 36)
     {
         if (NbElmt(PlayerSkills(ArrayPlayer(*p)[currentPlayer])) < 10 && (Cermin(ArrayPlayer(*p)[currentPlayer]) == false))

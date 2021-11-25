@@ -17,7 +17,9 @@
 
 int main()
 {
+
     int menu;
+BMENU:
     printf("WELCOME TO MOBILE LEGENDS ULAR TANGGA!!!\n");
     puts("1.New Game");
     puts("2.Exit");
@@ -47,6 +49,7 @@ int main()
         Players ArrPlayer;
         CreateEmptyArrayPlayer(&ArrPlayer);
         printf("\nBerapa Player: ");
+
         STARTKATA();
         int jumlahPlayer = KataInt(CKata);
         // Validasi input jumlah player
@@ -57,6 +60,7 @@ int main()
             {
                 puts("Minimum Player 2 dan Maximum Player 4");
                 printf("Berapa Player: ");
+
                 STARTKATA();
                 jumlahPlayer = KataInt(CKata);
             }
@@ -109,17 +113,16 @@ int main()
         boolean EndGame = false;
         int currentPlayer = 0;
         int RondeKe = 1;
-        int PlayerUsedUndo;
+        int PlayerUsedUndo = -1;
         while (!EndGame)
         {
             if (currentPlayer == JumlahPlayer(ArrPlayer))
             {
-                puts("### NEXNYA FUNGSI PUSH ###");
                 Push(&Round, ArrPlayer);
                 RondeKe++;
                 currentPlayer = 0;
             }
-        Z:
+        STARTGAME:
             printf("\nRonde Ke-%d\n", RondeKe);
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
             MAP(lvl, ArrPlayer);
@@ -129,11 +132,47 @@ int main()
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
+            if (PlayerUsedUndo == 0)
+            {
+                printf("\nApakah Anda ingin melakukan UNDO lagi? (Y/N): ");
+
+                STARTKATA();
+                // ### CEK VALID INPUT START ###
+                boolean valid = false;
+                do
+                {
+                    if ((CKata.TabKata[1] != 'N') && (CKata.TabKata[1] != 'Y'))
+                    {
+                        puts("Jawab antara Y atau N");
+                        printf("Apakah Anda ingin melakukan UNDO lagi? (Y/N): ");
+
+                        STARTKATA();
+                    }
+                    else
+                    {
+                        valid = true;
+                    }
+                } while (!valid);
+                // ### CEK VALID INPUT END ###
+                if (CKata.TabKata[1] == 'Y')
+                {
+                    // Pindah tempat
+                    RondeKe = InfoRonde(Round) + 1;
+                    UNDO(&Round, &ArrPlayer);
+                    currentPlayer = 0;
+                    goto STARTGAME;
+                }
+                else if (CKata.TabKata[1] == 'N')
+                {
+                    PlayerUsedUndo = -1;
+                }
+            }
             InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 25);
             InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 8);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
             printf("\nMasukkan Command: ");
+
             STARTKATA();
 
             // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN START ###
@@ -144,6 +183,23 @@ int main()
                     printf("\nMasukkan petak: ");
                     STARTKATA();
                     int petak = KataInt(CKata);
+                    // CEK VALIDASI INPUT INSPECT START
+                    valid = false;
+                    do
+                    {
+                        if ((petak <= 0) || (petak > maxPetak))
+                        {
+                            printf("Masukkan nilai petak antara 1 sampai %d\n", maxPetak);
+                            printf("Masukkan petak: ");
+                            STARTKATA();
+                            petak = KataInt(CKata);
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+                    } while (!valid);
+                    // CEK VALIDASI INPUT INSPECT END
                     INSPECT(lvl, petak);
                     puts("");
                 }
@@ -171,18 +227,14 @@ int main()
                     RondeKe = InfoRonde(Round) + 1;
                     UNDO(&Round, &ArrPlayer);
                     currentPlayer = 0;
-                    goto Z;
+                    goto STARTGAME;
                 }
-                else if (STRCOMP(CKata, "TMP"))
+                else if (STRCOMP(CKata, "ENDTURN"))
                 {
-                    puts("TEST LIST SKILL");
-                    printf("INDEX DI TOP = %d", InfoRonde(Round));
-                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrayPlayerStack(Round))[0])));
+                    puts("Commend ENDTURN dilakukan setelah ROLL!!!");
                 }
                 printf("\nMasukkan Command: ");
-                CKata.TabKata[1] = '.';
                 STARTKATA();
-                printKata(CKata);
             }
             // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN END ###
 
@@ -198,6 +250,7 @@ int main()
                 }
                 // ### CEK APAKAH ADA PLAYER YANG SUDAH FINIS END ###
                 printf("\nMasukkan Command: ");
+
                 STARTKATA();
             }
 
@@ -209,6 +262,23 @@ int main()
                     printf("\nMasukkan petak: ");
                     STARTKATA();
                     int petak = KataInt(CKata);
+                    // CEK VALIDASI INPUT INSPECT START
+                    valid = false;
+                    do
+                    {
+                        if ((petak <= 0) || (petak > maxPetak))
+                        {
+                            printf("Masukkan nilai petak antara 1 sampai %d\n", maxPetak);
+                            printf("Masukkan petak: ");
+                            STARTKATA();
+                            petak = KataInt(CKata);
+                        }
+                        else
+                        {
+                            valid = true;
+                        }
+                    } while (!valid);
+                    // CEK VALIDASI INPUT INSPECT END
                     INSPECT(lvl, petak);
                     puts("");
                 }
@@ -229,15 +299,14 @@ int main()
                     RondeKe = InfoRonde(Round) + 1;
                     UNDO(&Round, &ArrPlayer);
                     currentPlayer = 0;
-                    goto Z;
+                    goto STARTGAME;
                 }
-                else if (STRCOMP(CKata, "TMP"))
+                else if (STRCOMP(CKata, "ROLL") || STRCOMP(CKata, "SKILL"))
                 {
-                    puts("TEST LIST SKILL");
-                    printf("INDEX DI TOP = %d", InfoRonde(Round));
-                    PrintMenuSkill((PlayerSkills(ArrayPlayer(ArrayPlayerStack(Round))[0])));
+                    puts("Commend ROLL dan SKILL tidak bisa digunakan setelah ROLL!!!");
                 }
                 printf("\nMasukkan Command: ");
+
                 STARTKATA();
             }
             if (STRCOMP(CKata, "ENDTURN"))
@@ -257,13 +326,11 @@ int main()
             printf("SELAMAT ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             printf(" MEMENANGKAN GAME MOBILE LEGEND ULAR TANGGA ^.^\n");
+            puts("");
             printf("Peringkat Player: \n");
             PrintRanking(ArrPlayer);
-            // int r1 = (Posisi(ArrayPlayer(ArrPlayer)[0]));
-            // int r2 = (Posisi(ArrayPlayer(ArrPlayer)[1]));
-            // int r3 = (Posisi(ArrayPlayer(ArrPlayer)[2]));
-            // int r1 = (Posisi(ArrayPlayer(ArrPlayer)[4]));
-
+            puts("");
+            goto BMENU;
         }
         // ### TEST MAP ###
         // printf("Masukkan Command: ");

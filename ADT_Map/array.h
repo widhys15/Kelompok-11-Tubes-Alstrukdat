@@ -2,7 +2,7 @@
 #define ARRAY_H
 #include "../boolean.h"
 
-#define MaxPetak 100
+#define MaxPetak 500
 
 typedef struct
 {

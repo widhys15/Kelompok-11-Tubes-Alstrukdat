@@ -64,15 +64,16 @@ void STARTKATA()
 {
     START();
     IgnoreBlank();
-    if (CC == MARK)
-    {
-        EndKata = true;
-    }
-    else
-    {
-        EndKata = false;
-        SalinKata();
-    }
+    SalinKata();
+    // if (CC == MARK)
+    // {
+    //     EndKata = true;
+    // }
+    // else
+    // {
+    //     EndKata = false;
+    //     SalinKata();
+    // }
 }
 
 void ADVKATA()
@@ -87,23 +88,14 @@ void ADVKATA()
         SalinKata();
     }
 }
-Kata AskCommand()
-{
-    STARTKATA();
-    while (!EndKata)
-    {
-        ADVKATA();
-    }
-    return CKata;
-}
 
 boolean STRCOMP(Kata k1, char k2[100])
 {
     int i = 1;
     int lengthk2 = strlen(k2);
-    boolean sama = true;
+    boolean sama = false;
     // (k1.Length == lengthk2) &&
-    while ((sama) && (i < lengthk2))
+    while ((i < lengthk2) && (k1.Length != 0) && (lengthk2 == k1.Length))
     {
         // printf("MASUK KE CEK KATA\n");
         // printf("K1 CKata = %c\n", k1.TabKata[i]);
