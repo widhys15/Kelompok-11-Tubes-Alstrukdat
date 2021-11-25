@@ -1,13 +1,17 @@
-
 #include <stdio.h>
 #include "stacklist.h"
 #include "../ADT_Player/player.c"
 /* Prototype manajemen memori */
 void CopyArrayPlayer(Players copy, Players *paste)
+/* I.S. players terdefinisi */
+/* F.S. Data players terdefinisi ke dalam list baru */
 {
     (*paste) = copy;
 }
+
 void CopyPasteListSkill(List copy, List *paste)
+/* I.S. list skill terdefinisi */
+/* F.S. list skill terdefinisi ke dalam list baru */
 {
     List TmpSkill;
     CreateEmpty(&TmpSkill);
@@ -32,6 +36,23 @@ void CopyPasteListSkill(List copy, List *paste)
     }
     (*paste) = TmpSkill;
 }
+
+void DealokasiSkillPlayer(Players *ps)
+/* I.S. players terdefinisi */
+/* F.S. Skill dari players terdealokasi */
+{
+    int TotalPlayer = JumlahPlayer(*ps);
+    for (int i = 0; i < TotalPlayer; i++)
+    {
+
+        int jumlahSkill = NbElmt(PlayerSkills(ArrayPlayer(*ps)[i]));
+        for (int j = 1; j <= jumlahSkill; j++)
+        {
+            DeleteSkill(&(PlayerSkills(ArrayPlayer(*ps)[i])), 1);
+        }
+    }
+}
+
 void AlokasiStack(addressStack *P, Players ps)
 /* I.S. Sembarang */
 /* F.S. Alamat P dialokasi, jika berhasil maka Info(P)=X dan 
@@ -51,19 +72,7 @@ void AlokasiStack(addressStack *P, Players ps)
         NextStack(*P) = Nil;
     }
 }
-void DealokasiSkillPlayer(Players *ps)
-{
-    int TotalPlayer = JumlahPlayer(*ps);
-    for (int i = 0; i < TotalPlayer; i++)
-    {
 
-        int jumlahSkill = NbElmt(PlayerSkills(ArrayPlayer(*ps)[i]));
-        for (int j = 1; j <= jumlahSkill; j++)
-        {
-            DeleteSkill(&(PlayerSkills(ArrayPlayer(*ps)[i])), 1);
-        }
-    }
-}
 void DealokasiStack(addressStack P)
 /* I.S. P adalah hasil alokasi, P != Nil */
 /* F.S. Alamat P didealokasi, dikembalikan ke sistem */
@@ -78,6 +87,7 @@ boolean IsEmptyStack(Stack S)
 {
     return (Top(S) == Nil);
 }
+
 void CreateEmptyStack(Stack *S)
 /* I.S. sembarang */
 /* F.S. Membuat sebuah stack S yang kosong */
@@ -102,6 +112,7 @@ void Push(Stack *S, Players ps)
         Top(*S) = p;
     }
 }
+
 void Pop(Stack *S, Players *ps)
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak mungkin kosong */

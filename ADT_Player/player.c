@@ -52,3 +52,47 @@ void PrintNamePlayer(Player p)
         printf("%c", (Name(p))[i]);
     }
 }
+
+void PrintRanking(Players ps)
+/* I.S. ps terdefinisi */
+/* F.S. Menampilkan Ranking pemain yang menang */
+{
+    int totalplayers = JumlahPlayer(ps);
+    int position[totalplayers];
+    int p[totalplayers];
+    int temp1, temp2;
+    int i,j;
+    // Deklarasi posisi pemain ke dalam array
+    for (i = 0; i < totalplayers; i++)
+    {
+        position[i] = Posisi(ArrayPlayer(ps)[i]);
+        p[i] = i;
+    }
+    // Sorting posisi player dari terbesar ke terkecil
+    for (i = 0; i < totalplayers; i++)
+    {
+        for (j = 0; j < totalplayers-1; j++)
+        {
+            if (position[j] <= position[j+1])
+            {
+                temp1 = position[j];
+                temp2 = p[j];
+                position[j] = position[j+1];
+                p[j] = p[j+1];
+                position[j+1] = temp1;
+                p[j+1] = temp2;
+            }
+            
+        }
+            
+    }
+    for (i = 0; i < totalplayers; i++)
+    {
+        printf("%d. ", i+1);
+        PrintNamePlayer(ArrayPlayer(ps)[p[i]]);
+        puts("");
+    }
+    
+    
+    
+}

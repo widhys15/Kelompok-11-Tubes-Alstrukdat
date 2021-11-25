@@ -43,4 +43,7 @@ void Buff(Players p, int currentPlayer);
 /* F.S. Menampilkan buff yang aktif berdasarkan nilai boolean yang ada di player */
 
 void UNDO(Stack *s, Players *ps);
+/* I.S. Stack s terdefinisi */
+/* F.S. Mengembalikan game ke state sebelumnya */
+
 #endif

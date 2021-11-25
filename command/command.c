@@ -722,6 +722,8 @@ void skill(Players *p, int currentPlayer, int minRoll, int maxRoll, Map M, int m
 }
 
 void UNDO(Stack *s, Players *ps)
+/* I.S. Stack s terdefinisi */
+/* F.S. Mengembalikan game ke state sebelumnya */
 {
     Pop(s, ps);
 }

@@ -60,4 +60,8 @@ void PrintNamePlayer(Player p);
 /* I.S. p terdefinisi */
 /* F.S. Menampilkan nama player */
 
+void PrintRanking(Players ps);
+/* I.S. ps terdefinisi */
+/* F.S. Menampilkan Ranking pemain yang menang */
+
 #endif
