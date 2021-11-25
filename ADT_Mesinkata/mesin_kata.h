@@ -57,4 +57,5 @@ int KataInt(Kata k);
 void KataMap(Kata k, char importMap[100]);
 void KataPlayer(Kata k, char namaPlayer[20]);
 void printKata(Kata kata);
+void KataChar(Kata k, char c[100]);
 #endif

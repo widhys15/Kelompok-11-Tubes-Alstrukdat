@@ -223,6 +223,14 @@ void KataMap(Kata k, char importMap[100])
         importMap[i - 1] = k.TabKata[i];
     }
 }
+
+void KataChar(Kata k, char c[100])
+{
+    for (int i = 1; i <= k.Length; i++)
+    {
+        c[i - 1] = k.TabKata[i];
+    }
+}
 void KataPlayer(Kata k, char namaPlayer[20])
 {
     for (int i = 1; i <= k.Length; i++)

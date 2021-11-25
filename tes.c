@@ -72,7 +72,17 @@ BMENU:
         puts("");
         AddPlayer(&ArrPlayer, jumlahPlayer);
         Map lvl;
-        char conf[20] = "config2.txt";
+
+        // // VERSI DARI ADMIN START
+        // char conf[20] = "config.txt";
+        // // VERSI DARI ADMIN START
+
+        // VERSI MINTA DARI INPUT USER START
+        printf("\nMasukkan config yang ingin dipakai: ");
+        STARTKATA();
+        char conf[100];
+        KataChar(CKata, conf);
+        // VERSI MINTA DARI INPUT USER END
         char importMap[100];
 
         // Import MaxPetak start
