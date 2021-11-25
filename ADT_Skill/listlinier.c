@@ -488,7 +488,7 @@ void Konkat1(List *L1, List *L2, List *L3)
     CreateEmpty(L2);
 };
 
-int random(int x)
+int randomnumber(int x)
 /* Menghasilkan nilai random dari suatu variabel */
 {
     int randoms;
@@ -626,7 +626,7 @@ void RandomSkill(List *L, int X)
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
     int r;
-    r = random(X);
+    r = randomnumber(X);
     address P = Alokasi(r);
     if (P != Nil)
     {
