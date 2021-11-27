@@ -14,15 +14,15 @@
 // #include "ADT_Skill/listlinier.h"
 #include "command/command.h"
 #include "command/command.c"
+#include "ART/art.c"
 
 int main()
 {
 
     int menu;
 BMENU:
-    printf("WELCOME TO MOBILE LEGENDS ULAR TANGGA!!!\n");
-    puts("1.New Game");
-    puts("2.Exit");
+    MainMenu();
+    puts("");
     printf("-> ");
     STARTKATA();
     // Validasi input
@@ -79,9 +79,10 @@ BMENU:
 
         // VERSI MINTA DARI INPUT USER START
         printf("\nMasukkan config yang ingin dipakai: ");
-        STARTKATA();
         char conf[100];
-        KataChar(CKata, conf);
+        scanf("%[^\n]%*c", conf);
+        // STARTKATA();
+        // KataChar(CKata, conf);
         // VERSI MINTA DARI INPUT USER END
         char importMap[100];
 
@@ -181,8 +182,9 @@ BMENU:
             InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 8);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
-            printf("\nMasukkan Command: ");
-
+            Command();
+            puts("");
+            printf("-> ");
             STARTKATA();
 
             // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN START ###
@@ -243,7 +245,9 @@ BMENU:
                 {
                     puts("Commend ENDTURN dilakukan setelah ROLL!!!");
                 }
-                printf("\nMasukkan Command: ");
+                Command();
+                puts("");
+                printf("-> ");
                 STARTKATA();
             }
             // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN END ###
@@ -259,8 +263,9 @@ BMENU:
                     break;
                 }
                 // ### CEK APAKAH ADA PLAYER YANG SUDAH FINIS END ###
-                printf("\nMasukkan Command: ");
-
+                Command();
+                puts("");
+                printf("-> ");
                 STARTKATA();
             }
 
@@ -315,7 +320,9 @@ BMENU:
                 {
                     puts("Commend ROLL dan SKILL tidak bisa digunakan setelah ROLL!!!");
                 }
-                printf("\nMasukkan Command: ");
+                Command();
+                puts("");
+                printf("-> ");
 
                 STARTKATA();
             }

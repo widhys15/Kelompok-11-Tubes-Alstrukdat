@@ -1,0 +1,6 @@
+
+========================= COMMAND ==============================
+|          Ketik command yang valid untuk bermain:             |
+|      SKILL        MAP          BUFF         INSPECT          |
+|             ROLL       ENDTURN        UNDO                   |
+================================================================
