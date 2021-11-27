@@ -728,13 +728,66 @@ void UNDO(Stack *s, Players *ps)
     Pop(s, ps);
 }
 
-// int test2(List L, int x)
-// {
-// }
-// void test(Players *p, int inputs, int currentPlayer)
-// {
-//     test2(PlayerSkills((ArrayPlayer(*p)[currentPlayer])), 1);
+boolean VotingUndo(Players ps)
+{
+    int WantUndo;
+    int DontWantUndo;
+    puts("\n|--------------- MELAKUKAN VOTING UNDO ---------------|\n");
+    for (int i = 0; i < JumlahPlayer(ps); i++)
+    {
 
-//     PlayerSkills((ArrayPlayer(*p)[currentPlayer]));
-//     Posisi((ArrayPlayer(*p)[currentPlayer]));
-// }
+        PrintNamePlayer(ArrayPlayer(ps)[i]);
+        printf(" maukah Anda membolehkan permainan ini menggunakan Command UNDO? (Y/N): ");
+        STARTKATA();
+        // ### CEK VALID INPUT START ###
+        boolean valid = false;
+        do
+        {
+            if ((CKata.TabKata[1] != 'N') && (CKata.TabKata[1] != 'Y'))
+            {
+                puts("Jawab antara Y atau N");
+                PrintNamePlayer(ArrayPlayer(ps)[i]);
+                printf(" maukah Anda membolehkan permainan ini menggunakan Command UNDO? (Y/N): ");
+                STARTKATA();
+            }
+            else
+            {
+                valid = true;
+            }
+        } while (!valid);
+        // ### CEK VALID INPUT END ###
+        if (CKata.TabKata[1] == 'Y')
+        {
+            WantUndo++;
+        }
+        else if (CKata.TabKata[1] == 'N')
+        {
+            DontWantUndo++;
+        }
+        puts("");
+    }
+    if (WantUndo > DontWantUndo)
+    {
+        return true;
+    }
+    else if (DontWantUndo > WantUndo)
+    {
+        return false;
+    }
+    else if (DontWantUndo == WantUndo)
+    {
+        printf("Karena jumlah voting seimbang maka akan digacha oleh angka.\n");
+        printf("Bila angka ganjil maka UNDO boleh digunakan.\n");
+        printf("Bila angka genap maka UNDO tidak boleh digunakan.\n");
+        int angka = randomnumber(69420);
+        printf("Angka = %d\n", angka);
+        if (angka % 2 == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+}

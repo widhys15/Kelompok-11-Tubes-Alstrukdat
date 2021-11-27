@@ -46,4 +46,5 @@ void UNDO(Stack *s, Players *ps);
 /* I.S. Stack s terdefinisi */
 /* F.S. Mengembalikan game ke state sebelumnya */
 
+boolean VotingUndo(Players ps);
 #endif

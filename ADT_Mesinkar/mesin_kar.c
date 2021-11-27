@@ -3,7 +3,6 @@
 
 #include "mesin_kar.h"
 #include <stdio.h>
-
 char CC;
 boolean EOP;
 

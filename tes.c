@@ -71,6 +71,20 @@ BMENU:
         } while (!valid);
         puts("");
         AddPlayer(&ArrPlayer, jumlahPlayer);
+        // ### Cek command Undo Allowed or Not START ###
+
+        boolean UndoAllowed = VotingUndo(ArrPlayer);
+        puts("\n|------------------- HASIL VOTING --------------------|");
+        if (UndoAllowed == true)
+        {
+            puts("Command UNDO dapat digunakan");
+        }
+        else
+        {
+            puts("Command UNDO tidak dapat digunakan");
+        }
+        boolean UndoAgain;
+        // ### Cek command Undo Allowed or Not END ###
         Map lvl;
 
         // // VERSI DARI ADMIN START
@@ -81,6 +95,22 @@ BMENU:
         printf("\nMasukkan config yang ingin dipakai: ");
         char conf[100];
         scanf("%[^\n]%*c", conf);
+        boolean filefound = false;
+        do
+        {
+            if (access(conf, F_OK) != -1)
+            {
+                filefound = true;
+                break;
+            }
+            else
+            {
+                printf("file configuration is not found\n");
+                printf("\nMasukkan config yang ingin dipakai: ");
+                scanf("%[^\n]%*c", conf);
+            }
+        } while (!filefound);
+
         // STARTKATA();
         // KataChar(CKata, conf);
         // VERSI MINTA DARI INPUT USER END
@@ -122,9 +152,9 @@ BMENU:
 
         // ### TEST GAME ###
         boolean EndGame = false;
+
         int currentPlayer = 0;
         int RondeKe = 1;
-        int PlayerUsedUndo = -1;
         while (!EndGame)
         {
             if (currentPlayer == JumlahPlayer(ArrPlayer))
@@ -143,41 +173,6 @@ BMENU:
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
-            if (PlayerUsedUndo == 0)
-            {
-                printf("\nApakah Anda ingin melakukan UNDO lagi? (Y/N): ");
-
-                STARTKATA();
-                // ### CEK VALID INPUT START ###
-                boolean valid = false;
-                do
-                {
-                    if ((CKata.TabKata[1] != 'N') && (CKata.TabKata[1] != 'Y'))
-                    {
-                        puts("Jawab antara Y atau N");
-                        printf("Apakah Anda ingin melakukan UNDO lagi? (Y/N): ");
-
-                        STARTKATA();
-                    }
-                    else
-                    {
-                        valid = true;
-                    }
-                } while (!valid);
-                // ### CEK VALID INPUT END ###
-                if (CKata.TabKata[1] == 'Y')
-                {
-                    // Pindah tempat
-                    RondeKe = InfoRonde(Round) + 1;
-                    UNDO(&Round, &ArrPlayer);
-                    currentPlayer = 0;
-                    goto STARTGAME;
-                }
-                else if (CKata.TabKata[1] == 'N')
-                {
-                    PlayerUsedUndo = -1;
-                }
-            }
             InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 25);
             InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 8);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
@@ -187,7 +182,7 @@ BMENU:
             printf("-> ");
             STARTKATA();
 
-            // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN START ###
+            // ### command YANG BISA SAAT FASE ROLL BLOM DIJALANKAN START ###
             while (!STRCOMP(CKata, "ROLL"))
             {
                 if (STRCOMP(CKata, "INSPECT"))
@@ -232,25 +227,70 @@ BMENU:
                 {
                     Buff(ArrPlayer, currentPlayer);
                 }
-                else if (STRCOMP(CKata, "UNDO"))
+                else if (STRCOMP(CKata, "UNDO") && UndoAllowed)
                 {
-                    puts("INI FUNGSI UNDO");
-                    PlayerUsedUndo = currentPlayer;
                     RondeKe = InfoRonde(Round) + 1;
                     UNDO(&Round, &ArrPlayer);
                     currentPlayer = 0;
+                    printf("\nRonde Ke-%d\n", RondeKe);
+                    puts("|--------- POSISI PLAYER SEKARANG ---------|");
+                    MAP(lvl, ArrPlayer);
+                    printf("|------------------------------------------|\n");
+                    UndoAgain = true;
+                    while (UndoAgain)
+                    {
+                        printf("\nApakah Anda ingin melakukan UNDO lagi? (Y/N): ");
+                        STARTKATA();
+                        // ### CEK VALID INPUT START ###
+                        boolean valid = false;
+                        do
+                        {
+                            if ((CKata.TabKata[1] != 'N') && (CKata.TabKata[1] != 'Y'))
+                            {
+                                puts("Jawab antara Y atau N");
+                                printf("Apakah Anda ingin melakukan UNDO lagi? (Y/N): ");
+                                STARTKATA();
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
+                        } while (!valid);
+                        // ### CEK VALID INPUT END ###
+                        if (CKata.TabKata[1] == 'Y')
+                        {
+                            // Pindah tempat
+                            RondeKe = InfoRonde(Round) + 1;
+                            UNDO(&Round, &ArrPlayer);
+                            currentPlayer = 0;
+                            printf("\nRonde Ke-%d\n", RondeKe);
+                            puts("|--------- POSISI PLAYER SEKARANG ---------|");
+                            MAP(lvl, ArrPlayer);
+                            printf("|------------------------------------------|\n");
+                        }
+                        else if (CKata.TabKata[1] == 'N')
+                        {
+                            UndoAgain = false;
+                            break;
+                        }
+                    }
                     goto STARTGAME;
+                }
+
+                else if (STRCOMP(CKata, "UNDO") && !UndoAllowed)
+                {
+                    puts("Dari hasil voting, UNDO tidak dapat digunakan");
                 }
                 else if (STRCOMP(CKata, "ENDTURN"))
                 {
-                    puts("Commend ENDTURN dilakukan setelah ROLL!!!");
+                    puts("Command ENDTURN dilakukan setelah ROLL!!!");
                 }
                 Command();
                 puts("");
                 printf("-> ");
                 STARTKATA();
             }
-            // ### COMMEND YANG BISA SAAT FASE ROLL BLOM DIJALANKAN END ###
+            // ### command YANG BISA SAAT FASE ROLL BLOM DIJALANKAN END ###
 
             if (STRCOMP(CKata, "ROLL")) // Kelar Roll atau kelar turn
             {
@@ -269,7 +309,7 @@ BMENU:
                 STARTKATA();
             }
 
-            // ### COMMEND YANG BISA SAAT FASE ROLL SUDAH DIJALANKAN START ###
+            // ### command YANG BISA SAAT FASE ROLL SUDAH DIJALANKAN START ###
             while (!STRCOMP(CKata, "ENDTURN"))
             {
                 if (STRCOMP(CKata, "INSPECT"))
@@ -307,18 +347,62 @@ BMENU:
                 {
                     Buff(ArrPlayer, currentPlayer);
                 }
-                else if (STRCOMP(CKata, "UNDO"))
+                else if (STRCOMP(CKata, "UNDO") && UndoAllowed)
                 {
-                    puts("INI FUNGSI UNDO");
-                    PlayerUsedUndo = currentPlayer;
                     RondeKe = InfoRonde(Round) + 1;
                     UNDO(&Round, &ArrPlayer);
                     currentPlayer = 0;
+                    printf("\nRonde Ke-%d\n", RondeKe);
+                    puts("|--------- POSISI PLAYER SEKARANG ---------|");
+                    MAP(lvl, ArrPlayer);
+                    printf("|------------------------------------------|\n");
+                    UndoAgain = true;
+                    while (UndoAgain)
+                    {
+                        printf("\nApakah Anda ingin melakukan UNDO lagi? (Y/N): ");
+                        STARTKATA();
+                        // ### CEK VALID INPUT START ###
+                        boolean valid = false;
+                        do
+                        {
+                            if ((CKata.TabKata[1] != 'N') && (CKata.TabKata[1] != 'Y'))
+                            {
+                                puts("Jawab antara Y atau N");
+                                printf("Apakah Anda ingin melakukan UNDO lagi? (Y/N): ");
+                                STARTKATA();
+                            }
+                            else
+                            {
+                                valid = true;
+                            }
+                        } while (!valid);
+                        // ### CEK VALID INPUT END ###
+                        if (CKata.TabKata[1] == 'Y')
+                        {
+                            // Pindah tempat
+                            RondeKe = InfoRonde(Round) + 1;
+                            UNDO(&Round, &ArrPlayer);
+                            currentPlayer = 0;
+                            printf("\nRonde Ke-%d\n", RondeKe);
+                            puts("|--------- POSISI PLAYER SEKARANG ---------|");
+                            MAP(lvl, ArrPlayer);
+                            printf("|------------------------------------------|\n");
+                        }
+                        else if (CKata.TabKata[1] == 'N')
+                        {
+                            UndoAgain = false;
+                            break;
+                        }
+                    }
                     goto STARTGAME;
+                }
+                else if (STRCOMP(CKata, "UNDO") && !UndoAllowed)
+                {
+                    puts("Dari hasil voting, UNDO tidak dapat digunakan");
                 }
                 else if (STRCOMP(CKata, "ROLL") || STRCOMP(CKata, "SKILL"))
                 {
-                    puts("Commend ROLL dan SKILL tidak bisa digunakan setelah ROLL!!!");
+                    puts("Command ROLL dan SKILL tidak bisa digunakan setelah ROLL!!!");
                 }
                 Command();
                 puts("");
@@ -336,7 +420,7 @@ BMENU:
                 }
                 currentPlayer++;
             }
-            // ### COMMEND YANG BISA SAAT FASE ROLL SUDAH DIJALANKAN END ###
+            // ### command YANG BISA SAAT FASE ROLL SUDAH DIJALANKAN END ###
         }
         if (EndGame == true)
         {
