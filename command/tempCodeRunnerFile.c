@@ -1,1 +1,0 @@
-printf("\n########info skill = %d########\n", info);

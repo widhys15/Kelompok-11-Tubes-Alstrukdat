@@ -1,9 +1,6 @@
 {
     "files.associations": {
-        "*html": "html",
-        "array.h": "c",
-        "unistd.h": "c",
-        "mesin_kar.h": "c",
-        "time.h": "c"
+        "command.h": "c",
+        "boolean.h": "c"
     }
 }

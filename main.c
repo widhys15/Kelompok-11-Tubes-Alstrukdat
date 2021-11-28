@@ -6,7 +6,6 @@
 
 int main()
 {
-
     int menu;
 BMENU:
     MainMenu();
@@ -74,10 +73,6 @@ BMENU:
         boolean UndoAgain;
         // ### Cek command Undo Allowed or Not END ###
         Map lvl;
-
-        // // VERSI DARI ADMIN START
-        // char conf[20] = "config.txt";
-        // // VERSI DARI ADMIN START
 
         // VERSI MINTA DARI INPUT USER START
         printf("\nMasukkan config yang ingin dipakai: ");
@@ -156,20 +151,16 @@ BMENU:
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
             MAP(lvl, ArrPlayer);
             printf("|------------------------------------------|\n");
-
             //### Display Giliran Player Start ###
             printf("\nGiliran kamu ");
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
-            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 25);
-            InjectSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), 8);
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
             puts("");
             Command();
             puts("");
             printf("-> ");
             STARTKATA();
-
             // ### command YANG BISA SAAT FASE ROLL BLOM DIJALANKAN START ###
             while (!STRCOMP(CKata, "ROLL"))
             {
@@ -264,7 +255,6 @@ BMENU:
                     }
                     goto STARTGAME;
                 }
-
                 else if (STRCOMP(CKata, "UNDO") && !UndoAllowed)
                 {
                     puts("Dari hasil voting, UNDO tidak dapat digunakan");
@@ -279,7 +269,6 @@ BMENU:
                 STARTKATA();
             }
             // ### command YANG BISA SAAT FASE ROLL BLOM DIJALANKAN END ###
-
             if (STRCOMP(CKata, "ROLL")) // Kelar Roll atau kelar turn
             {
                 ROLL(minRoll, maxRoll, maxPetak, &(ArrayPlayer(ArrPlayer)[currentPlayer]), lvl);
@@ -296,7 +285,6 @@ BMENU:
                 printf("-> ");
                 STARTKATA();
             }
-
             // ### command YANG BISA SAAT FASE ROLL SUDAH DIJALANKAN START ###
             while (!STRCOMP(CKata, "ENDTURN"))
             {
