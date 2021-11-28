@@ -1,3 +1,6 @@
+/* File         : main.c */
+/* Deskripsi    : Main program untuk Mobitangga */
+
 #include <stdio.h>
 #include <unistd.h>
 #include "command/command.h"

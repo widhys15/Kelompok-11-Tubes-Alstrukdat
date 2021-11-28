@@ -1,3 +1,6 @@
+/* File         : player.h */
+/* Deskripsi    : ADT Player */
+
 #ifndef player_H
 #define player_H
 

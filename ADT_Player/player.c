@@ -1,3 +1,6 @@
+/* File         : player.c */
+/* Deskripsi    : Implementasi dari player.h */
+
 #include "player.h"
 #include <stdio.h>
 #include "../ADT_Mesinkata/mesin_kata.c"

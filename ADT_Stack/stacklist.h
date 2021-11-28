@@ -1,4 +1,6 @@
-/* File : stacklist.h */
+/* File         : stacklist.h */
+/* Deskripsi    : ADT Stack dari definisi stacklist */
+
 #ifndef _STACKLIST_H
 #define _STACKLIST_H
 

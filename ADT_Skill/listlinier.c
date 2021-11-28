@@ -1,3 +1,6 @@
+/* File         : listlinier.c */
+/* Deskripsi    : Implementasi dari listlinier.h */
+
 #include "listlinier.h"
 #include <stdio.h>
 #include <stdlib.h>

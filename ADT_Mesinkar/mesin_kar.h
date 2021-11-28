@@ -1,5 +1,5 @@
-/* File: mesinkar.h */
-/* Definisi Mesin Karakter */
+/* File         : mesin_kar.h */
+/* Deskripsi    : ADT Mesinkar */
 
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_

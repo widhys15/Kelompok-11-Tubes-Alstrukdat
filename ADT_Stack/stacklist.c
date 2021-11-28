@@ -1,3 +1,6 @@
+/* File         : stacklist.c */
+/* Deskripsi    : Implementasi dari stacklist.h */
+
 #include <stdio.h>
 #include "stacklist.h"
 #include "../ADT_Player/player.c"

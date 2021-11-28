@@ -1,4 +1,5 @@
-/* Definisi type boolean */
+/* File         : boolean.h */
+/* Deskripsi    : Definisi boolean */
 
 #ifndef _BOOLEAN_h
 #define _BOOLEAN_h

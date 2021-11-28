@@ -1,3 +1,6 @@
+/* File         : array.c */
+/* Deskripsi    : Implementasi array.h untuk ADT Map */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "array.h"

@@ -1,3 +1,6 @@
+/* File         : command.c */
+/* Deskripsi    : Implementasi command.h */
+
 #include "command.h"
 #include "../ADT_Map/array.c"
 // #include "../ADT_Player/player.c"

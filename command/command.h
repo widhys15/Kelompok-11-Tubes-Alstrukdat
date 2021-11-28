@@ -1,3 +1,6 @@
+/* File         : command.h */
+/* Deskripsi    : Header file untuk command */
+
 #ifndef command_H
 #define command_H
 #include "../boolean.h"

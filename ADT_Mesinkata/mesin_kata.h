@@ -1,5 +1,5 @@
-/* File: mesinkata.h */
-/* Definisi Mesin Kata: Model Akuisisi Versi I */
+/* File         : mesin_kata.c */
+/* Deskripsi    : ADT Mesinkata */
 
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__

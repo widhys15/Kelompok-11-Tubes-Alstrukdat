@@ -1,3 +1,6 @@
+/* File         : mesin_kata.c */
+/* Deskripsi    : Implementasi dari mesin_kata.h */
+
 #include <stdio.h>
 #include <string.h>
 #include "mesin_kata.h"

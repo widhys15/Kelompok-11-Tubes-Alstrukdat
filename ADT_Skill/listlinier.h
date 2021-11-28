@@ -1,7 +1,5 @@
-/* File : listlinier.h */
-/* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi address dengan pointer */
-/* infotype adalah integer */
+/* File         : listlinier.h */
+/* Deskripsi    : ADT Skill dari definisi listlinier */
 
 #ifndef listlinier_H
 #define listlinier_H

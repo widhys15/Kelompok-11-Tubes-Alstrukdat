@@ -1,3 +1,6 @@
+/* File         : array.h */
+/* Deskripsi    : ADT Map dari array */
+
 #ifndef ARRAY_H
 #define ARRAY_H
 #include "../boolean.h"
