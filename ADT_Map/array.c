@@ -27,20 +27,6 @@ void PrintMap(Map *M)
     }
 }
 
-// void PrintLokasiPlayer(Map M, int lokasi)
-// /*
-// I.S. M sebuah Map yang terdefinisi
-// I.F. Menampilkan Map yang terdefinisi
-// */
-// // KALO MAKE POINTER, YG ORIGINAL BAKAL BERUBAH
-// {
-//     Petak((M).map[lokasi - 1]) = '*';
-//     for (int i = 0; i < (M).Neff; i++)
-//     {
-//         printf("%c", Petak((M).map[i]));
-//     }
-// }
-
 void SetTeleport(Map *M, int In, int Out)
 /* I.S. M sebuah Map terdefinisi */
 /* F.S. Mengset lokasi In dan Out teleport pada petak */

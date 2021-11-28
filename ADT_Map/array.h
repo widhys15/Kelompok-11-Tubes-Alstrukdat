@@ -30,8 +30,6 @@ void PrintMap(Map *M);
 /* I.S. M sebuah Map yang terdefinisi */
 /* F.S. Menampilkan Map yang terdefinisi */
 
-// void PrintLokasiPlayer(Map M, int lokasi);
-
 void SetTeleport(Map *M, int In, int Out);
 /* I.S. M sebuah Map terdefinisi */
 /* F.S. Mengset lokasi In dan Out teleport pada petak */
