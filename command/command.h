@@ -50,4 +50,6 @@ void UNDO(Stack *s, Players *ps);
 /* F.S. Mengembalikan game ke state sebelumnya */
 
 boolean VotingUndo(Players ps);
+/* I.S. Player terdefinisi */
+/* F.S. Menghasilkan boolean, bila true maka UNDO dapat digunakan */
 #endif

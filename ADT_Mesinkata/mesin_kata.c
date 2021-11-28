@@ -68,15 +68,6 @@ void STARTKATA()
     START();
     IgnoreBlank();
     SalinKata();
-    // if (CC == MARK)
-    // {
-    //     EndKata = true;
-    // }
-    // else
-    // {
-    //     EndKata = false;
-    //     SalinKata();
-    // }
 }
 
 void ADVKATA()
