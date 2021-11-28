@@ -320,10 +320,10 @@ BMENU:
                         puts("Command ENDTURN dilakukan setelah ROLL!!!");
                     }
                 }
-                // Command();
-                // puts("");
-                // printf("-> ");
-                // STARTKATA();
+                else
+                {
+                    puts("Input tidak valid!!!");
+                }
             }
         }
         if (EndGame == true)
