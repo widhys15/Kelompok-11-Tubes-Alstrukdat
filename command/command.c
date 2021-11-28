@@ -534,8 +534,8 @@ void UseSkill(Players *p, int inputs, int currentPlayer, int minRoll, int maxRol
         if (NbElmt(PlayerSkills(ArrayPlayer(*p)[currentPlayer])) < 10 && (Cermin(ArrayPlayer(*p)[currentPlayer]) == false))
         {
             Cermin(ArrayPlayer(*p)[currentPlayer]) = true;
-            RandomSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), 3);
-            RandomSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), 5);
+            RandomSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), 30);
+            RandomSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), 50);
             DeleteSkill(&(PlayerSkills(ArrayPlayer(*p)[currentPlayer])), inputs);
         }
         else
@@ -733,8 +733,8 @@ void UNDO(Stack *s, Players *ps)
 
 boolean VotingUndo(Players ps)
 {
-    int WantUndo;
-    int DontWantUndo;
+    int WantUndo = 0;
+    int DontWantUndo = 0;
     puts("\n|--------------- MELAKUKAN VOTING UNDO ---------------|\n");
     for (int i = 0; i < JumlahPlayer(ps); i++)
     {
