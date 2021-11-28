@@ -148,13 +148,13 @@ BMENU:
         int RondeKe = 1;
         while (!EndGame)
         {
+        STARTGAME:
             if (currentPlayer == JumlahPlayer(ArrPlayer))
             {
                 Push(&Round, ArrPlayer);
                 RondeKe++;
                 currentPlayer = 0;
             }
-        STARTGAME:
             NextPlayer = false;
             RollUsed = false;
             printf("\nRonde Ke-%d\n", RondeKe);
@@ -273,6 +273,7 @@ BMENU:
                             }
                             else if (CKata.TabKata[1] == 'N')
                             {
+                                Push(&Round, ArrPlayer);
                                 UndoAgain = false;
                                 break;
                             }
