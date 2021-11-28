@@ -18,8 +18,8 @@ void print_image(char *filename) {
 }
 
 void MainMenu() {
-    print_image("ART/mainmenu.txt");
+    print_image("src/ART/mainmenu.txt");
 }
 void Command() {
-    print_image("ART/command.txt");
+    print_image("src/ART/command.txt");
 }

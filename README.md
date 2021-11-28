@@ -9,9 +9,14 @@ ADT-ADT yang dipakai:
 5. ADT Skill
 6. ADT Stack
 
-Cara menjalankan game menggunakan gcc:
-gcc main.c -o main
+Cara menjalankan game menggunakan gcc (di windows):
+gcc ./src/main.c -o main
+cmd
 main
+
+Cara menjalankan game menggunakan gcc (di linux):
+gcc ./src/main.c -o main
+./main
 
 Ketika memasukkan input membaca file, masukkan nama folder seperti contoh di bawah ini:
 "Konfigurasi/config.txt"
