@@ -32,7 +32,8 @@ int main()
     } while (!valid);
     puts("");
     AddPlayer(&ArrPlayer, jumlahPlayer);
-
+    puts("### KETIKA RONDE 0 BERAKHIR ###");
+    puts("MELAKUKAN PUSH");
     Push(&Round, ArrPlayer);
     for (int i = 0; i < jumlahPlayer; i++)
     {

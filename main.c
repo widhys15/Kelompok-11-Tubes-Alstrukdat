@@ -156,6 +156,7 @@ BMENU:
             }
         STARTGAME:
             NextPlayer = false;
+            RollUsed = false;
             printf("\nRonde Ke-%d\n", RondeKe);
             puts("|--------- POSISI PLAYER SEKARANG ---------|");
             MAP(lvl, ArrPlayer);
@@ -166,7 +167,6 @@ BMENU:
             PrintNamePlayer(ArrayPlayer(ArrPlayer)[currentPlayer]);
             //### Display Giliran Player End ###
             RandomSkill(&(PlayerSkills(ArrayPlayer(ArrPlayer)[currentPlayer])), currentPlayer);
-
             // ### command YANG BISA SAAT FASE ROLL BLOM DIJALANKAN START ###
             while (!NextPlayer)
             {
@@ -312,7 +312,6 @@ BMENU:
                             Cermin((ArrayPlayer(ArrPlayer)[currentPlayer])) = false;
                         }
                         currentPlayer++;
-                        RollUsed = false;
                         NextPlayer = true;
                     }
                     else
